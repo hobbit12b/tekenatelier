@@ -1,0 +1,1 @@
+{"version":1,"stickers":[],"instructions":"Voeg PNG/WebP-illustraties toe onder stickers/<thema>/. Entries: {id,name,theme,src,enabled}. src is relatief aan de app, bijvoorbeeld ./stickers/herfst/egel.png. Thema’s: herfst, sinterklaas, kerst, piraten, restaurant, sprookjes, beestjes, winter. Gebruik alleen algemene illustraties zonder leerlinggegevens."}

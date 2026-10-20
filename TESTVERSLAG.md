@@ -1,0 +1,23 @@
+# Testverslag tekenatelier
+
+Uitgevoerd tijdens de bouw op 20 oktober 2026, op Windows met Node.js 24 en Edge/Chromium. Uitsluitend synthetische testgegevens; het algemene appicoon is als testfoto en teststicker gebruikt.
+
+## Geslaagd
+
+- TypeScript-controle zonder fouten.
+- Vite-productiebuild en generatie van de serviceworker.
+- 12 Vitest-kerntests: vijf kleurmengcontroles; acht thema's; nieuw project; afwijzen ongeldig project; publieke data zonder foto; willekeurige encryptieparameters; juiste/verkeerde/korte wachtzinnen; privéopslag zonder thumbnail; atomair vervangen van ciphertext door een afgerond publiek project; verwijderen.
+- 14 browsercontroles op een venster van 1080 × 810: startscherm, tekenen/undo/redo, vijf lijndiktes, vormen plaatsen/vergroten/draaien/dupliceren, mengkleur, automatisch bewaren/heropenen, gum en export, afronden/downloaden, leerkrachtcode/acht thema's, stickerimport, fotovoorbereiding/verbergen/tonen, versleuteld opslaan zonder publieke inhoud, afronden met verwijdering van foto/ciphertext/undo, geen JavaScript-browserfouten.
+- PNG en JPG zijn byte-identiek met en zonder een extra fotoattribuut op het aangeleverde project; thumbnails zijn eveneens identiek. PDF en ZIP worden daadwerkelijk gegenereerd. Export gebruikt in de implementatie uitsluitend de expliciete Drawing-allowlist en tekenrenderer.
+- Visuele inspectie van het startscherm en tekenblad op iPad-afmetingen. De knoppen voor kleuren en lijndikte zijn op tabletformaat vergroot naar 56 × 56 pixels.
+- Productie onder `/tekenatelier/`: serviceworker geïnstalleerd, browser offline gezet en herladen; tekenen, mengen, afronden, opslaan, galerij heropenen en PDF downloaden geslaagd. De cache bevat uitsluitend de 12 algemene productie-appbestanden.
+
+De automatische browserbestanden zijn `scripts/browser-test.mjs` en `scripts/offline-test.mjs`. Screenshots en tijdelijke testresultaten staan lokaal onder `test-results/` en worden niet gepubliceerd.
+
+## Nog fysiek controleren
+
+Een echt iPad 9-apparaat, Safari/iPadOS, vingersnelheid, tweevingergebaren, voor-/achtercamera, de native deelkaart en Bestanden-app zijn niet fysiek getest. De README bevat een concrete testprocedure. Browserautomatisering op Windows vervangt deze controles niet. Ook gedrag bij OS-back-ups, geforceerd afsluiten, verwijderde browseropslag en bijna volle iPad-opslag vraagt apparaatcontroles.
+
+## Nog aan te leveren
+
+De professionele themastickers zijn niet meegeleverd. De acht volledige catalogi, import, selectie, plaatsing, schaal/rotatie en opslag zijn aanwezig. Geef per thema bij voorkeur minimaal acht passende illustraties met een transparante achtergrond. De optionele themaopdrachten zijn voorlopig tekstueel. Dit is dus een werkende technische versie; de professionele illustratiecollectie en fysieke iPad-acceptatie zijn nog nodig voor volledige afronding van de oorspronkelijke bouwopdracht.
