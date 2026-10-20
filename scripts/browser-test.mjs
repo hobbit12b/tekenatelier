@@ -7,7 +7,7 @@ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors
 await mkdir('test-results',{recursive:true});
 const checks=[];const check=(name)=>{checks.push(name);console.log('PASS',name);};
 try {
- await page.goto('http://127.0.0.1:5174/');await page.getByRole('heading',{name:'wat ga jij maken?'}).waitFor();
+ await page.goto('http://127.0.0.1:5174/');await page.getByRole('heading',{name:'kom, we gaan tekenen!'}).waitFor();
  await page.screenshot({path:'test-results/startscherm.png',fullPage:true});check('startscherm op iPad-formaat');
  await page.getByRole('button',{name:/nieuwe tekening/}).click();
  const canvas=page.getByLabel('tekenblad');const box=await canvas.boundingBox();assert(box.width>500&&box.height>300,JSON.stringify(box));

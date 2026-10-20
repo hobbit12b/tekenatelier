@@ -14,6 +14,12 @@ Uitgevoerd tijdens de bouw op 20 oktober 2026, op Windows met Node.js 24 en Edge
 
 De automatische browserbestanden zijn `scripts/browser-test.mjs` en `scripts/offline-test.mjs`. Screenshots en tijdelijke testresultaten staan lokaal onder `test-results/` en worden niet gepubliceerd.
 
+## Speelse vormgeving en glitter
+
+Na de eerste versie is de vormgeving aangepast aan het aangeleverde moodboard: krijtillustraties, een gekleurde naam, papieren kaarten, geïllustreerde materialen links en grote objectknoppen rechts. De afbeeldingen zijn met de ingebouwde ImageGen-tool gemaakt en worden lokaal gebundeld. Promptbeschrijvingen en bestanden staan onder `public/art/`.
+
+De glitterpen bevat nu statische vierpuntsterren in de tekenlaag en een onafhankelijke animatielaag met maximaal 260 bestaande sterretjes plus maximaal 70 tijdens een streek. De animatie ververst maximaal twintig keer per seconde, pauzeert in verborgen tabbladen en respecteert verminderde beweging. De export blijft stilstaand. De browsercheck `scripts/sparkle-test.mjs` bevestigt zichtbare verandering tussen frames, verdwijnen na undo en stilstand met verminderde beweging. Vier extra kerntests controleren ruimtelijke verdeling, limiet, spiegeling en afwezigheid bij gewone lijnen.
+
 ## Nog fysiek controleren
 
 Een echt iPad 9-apparaat, Safari/iPadOS, vingersnelheid, tweevingergebaren, voor-/achtercamera, de native deelkaart en Bestanden-app zijn niet fysiek getest. De README bevat een concrete testprocedure. Browserautomatisering op Windows vervangt deze controles niet. Ook gedrag bij OS-back-ups, geforceerd afsluiten, verwijderde browseropslag en bijna volle iPad-opslag vraagt apparaatcontroles.

@@ -30,7 +30,8 @@ Updates worden pas actief wanneer de oude appvensters gesloten zijn. Projecten s
 ## Tekenen
 
 - Kies **nieuwe tekening**, **over een foto** of **mijn tekeningen**.
-- Links staan potlood, stift, kwast, wasco, glitter, gum, verfemmertje en objectgereedschappen. Onderin staan vijf lijndiktes en zestien kleuren met huidtinten.
+- Links staan geïllustreerde knoppen voor potlood, stift, kwast, wasco, glitter, gum en verfemmertje. Rechts staan de objectgereedschappen. Onderin staan vijf lijndiktes en zestien kleuren met huidtinten.
+- Glitterlijnen hebben geanimeerde vierpuntsterretjes, ook na het tekenen. Bij verminderde beweging staan deze stil. PNG/JPG/PDF bewaren de glinsteringen als stilstaand beeld. Gummen en undo verwijderen ook de bijbehorende animatie.
 - **mengen** gebruikt een educatief RYB-kleurmodel: geel en blauw geven groen, rood en geel oranje, rood en blauw paars. Wit maakt lichter, zwart donkerder. Dit is een begrijpelijk leermodel, geen natuurkundige pigmentsimulatie.
 - Gemengde kleuren blijven in het project bewaard. De laatst gemaakte zestien eigen kleuren zijn beschikbaar.
 - Plaats vormen, tekst of stickers. Kies het pijltje om objecten later opnieuw te selecteren en te verplaatsen. Gebruik +, −, draaien, dupliceren en verwijderen. Twee vingers schalen/draaien een geselecteerd object.
