@@ -1,3 +1,4 @@
+import {fillPixels} from './fill';
 import {type Drawing,type Stroke,type Item,type Point} from './model';
 import {drawSparkle,sparklePoints} from './sparkles';
 const images=new Map<string,HTMLImageElement>();
@@ -12,4 +13,10 @@ export async function item(ctx:CanvasRenderingContext2D,o:Item){ctx.save();ctx.t
 export function background(ctx:CanvasRenderingContext2D,d:Drawing){ctx.fillStyle=d.background.startsWith('#')?d.background:'#fffef8';ctx.fillRect(0,0,d.width,d.height);ctx.strokeStyle='#dce7e4';ctx.fillStyle='#bdcecc';ctx.lineWidth=1;if(d.background==='ruitjes'){ctx.beginPath();for(let x=0;x<d.width;x+=35){ctx.moveTo(x,0);ctx.lineTo(x,d.height);}for(let y=0;y<d.height;y+=35){ctx.moveTo(0,y);ctx.lineTo(d.width,y);}ctx.stroke();}if(d.background==='stippen')for(let x=18;x<d.width;x+=35)for(let y=18;y<d.height;y+=35){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fill();}}
 export async function renderArt(canvas:HTMLCanvasElement,d:Drawing,scale=1,withBackground=false){canvas.width=Math.round(d.width*scale);canvas.height=Math.round(d.height*scale);const ctx=canvas.getContext('2d')!;ctx.scale(scale,scale);for(const m of d.marks){if(m.kind==='stroke')stroke(ctx,m,d.width);else if(m.kind==='fill')ctx.drawImage(await getImage(m.src),0,0,d.width,d.height);else await item(ctx,m);}if(withBackground){ctx.globalCompositeOperation='destination-over';background(ctx,d);ctx.globalCompositeOperation='source-over';}return canvas;}
 export function hit(o:Item,p:Point){const dx=p.x-o.x,dy=p.y-o.y,x=dx*Math.cos(o.rotation)+dy*Math.sin(o.rotation),y=-dx*Math.sin(o.rotation)+dy*Math.cos(o.rotation);return Math.abs(x)<Math.max(28,o.w/2+8)&&Math.abs(y)<Math.max(28,o.h/2+8);}
-export async function flood(d:Drawing,p:Point,color:string){const c=await renderArt(document.createElement('canvas'),d,1,true),ctx=c.getContext('2d')!,im=ctx.getImageData(0,0,c.width,c.height),a=im.data,x=Math.max(0,Math.min(c.width-1,Math.round(p.x))),y=Math.max(0,Math.min(c.height-1,Math.round(p.y))),start=(y*c.width+x)*4,target=[...a.slice(start,start+4)],out=new Uint8ClampedArray(a.length),seen=new Uint8Array(c.width*c.height),queue=new Int32Array(c.width*c.height);let head=0,tail=1;queue[0]=y*c.width+x;seen[queue[0]]=1;const rgb=[1,3,5].map(i=>parseInt(color.slice(i,i+2),16));while(head<tail){const index=queue[head++],i=index*4;if(Math.max(...target.slice(0,3).map((v,j)=>Math.abs(v-a[i+j])))>36)continue;out[i]=rgb[0];out[i+1]=rgb[1];out[i+2]=rgb[2];out[i+3]=255;const nx=index%c.width;for(const n of [nx>0?index-1:-1,nx<c.width-1?index+1:-1,index-c.width,index+c.width])if(n>=0&&n<seen.length&&!seen[n]){seen[n]=1;queue[tail++]=n;}}ctx.putImageData(new ImageData(out,c.width,c.height),0,0);return c.toDataURL('image/png');}
+export async function flood(d:Drawing,p:Point,color:string){
+ const c=await renderArt(document.createElement('canvas'),d,1,true),ctx=c.getContext('2d')!;
+ const pixels=ctx.getImageData(0,0,c.width,c.height);
+ const out=fillPixels(pixels.data,c.width,c.height,p.x,p.y,[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)));
+ ctx.putImageData(new ImageData(out,c.width,c.height),0,0);
+ return c.toDataURL('image/png');
+}

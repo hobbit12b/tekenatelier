@@ -27,3 +27,9 @@ Een echt iPad 9-apparaat, Safari/iPadOS, vingersnelheid, tweevingergebaren, voor
 ## Nog aan te leveren
 
 De professionele themastickers zijn niet meegeleverd. De acht volledige catalogi, import, selectie, plaatsing, schaal/rotatie en opslag zijn aanwezig. Geef per thema bij voorkeur minimaal acht passende illustraties met een transparante achtergrond. De optionele themaopdrachten zijn voorlopig tekstueel. Dit is dus een werkende technische versie; de professionele illustratiecollectie en fysieke iPad-acceptatie zijn nog nodig voor volledige afronding van de oorspronkelijke bouwopdracht.
+
+## Vergevingsgezind vullen en bijpassende pictogrammen
+
+Kleine onderbrekingen (circa 10 tekenpixels) worden in het detectiemasker gesloten; de zichtbare lijn blijft intact. De vulkleur vervangt ook de achtergrondbijdrage van zachte randpixels om witte naden te verminderen. Vier extra kerntests controleren kleine/grote openingen, de antialiasrand en een leeg blad. `scripts/fill-test.mjs` controleert een echte canvaslijn met een opening en de aansluiting van de vulling.
+
+Alle actieknoppen gebruiken nu de krijtillustraties uit `public/art/actions.png`, inclusief vullen, mengen, home, vormen, stickers, stempels, tekst, geschiedenis en dialoogknoppen. De zes bestaande materiaalillustraties blijven behouden.
