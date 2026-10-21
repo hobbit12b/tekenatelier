@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "stickers": [
     {
       "id": "herfst-heks-v1",
@@ -8,8 +8,8 @@
       "src": "./stickers/herfst/stickervel.png",
       "enabled": true,
       "crop": [
-        0.0,
-        0.0,
+        0,
+        0,
         0.26035911602209943,
         0.35451197053406996
       ]
@@ -22,7 +22,7 @@
       "enabled": true,
       "crop": [
         0.26035911602209943,
-        0.0,
+        0,
         0.24930939226519336,
         0.35451197053406996
       ]
@@ -35,7 +35,7 @@
       "enabled": true,
       "crop": [
         0.5096685082872928,
-        0.0,
+        0,
         0.2541436464088398,
         0.35451197053406996
       ]
@@ -48,7 +48,7 @@
       "enabled": true,
       "crop": [
         0.7638121546961326,
-        0.0,
+        0,
         0.2361878453038674,
         0.35451197053406996
       ]
@@ -60,7 +60,7 @@
       "src": "./stickers/herfst/stickervel.png",
       "enabled": true,
       "crop": [
-        0.0,
+        0,
         0.35451197053406996,
         0.26035911602209943,
         0.31123388581952116
@@ -112,7 +112,7 @@
       "src": "./stickers/herfst/stickervel.png",
       "enabled": true,
       "crop": [
-        0.0,
+        0,
         0.6657458563535912,
         0.26035911602209943,
         0.3342541436464088
@@ -156,6 +156,1099 @@
         0.2361878453038674,
         0.3342541436464088
       ]
+    },
+    {
+      "id": "sinterklaas-sinterklaas-v1",
+      "name": "sinterklaas",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.2451657458563536,
+        0.40423572744014735
+      ]
+    },
+    {
+      "id": "sinterklaas-mijter-v1",
+      "name": "mijter",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2451657458563536,
+        0,
+        0.27002762430939226,
+        0.40423572744014735
+      ]
+    },
+    {
+      "id": "sinterklaas-staf-v1",
+      "name": "staf",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0,
+        0.24585635359116023,
+        0.40423572744014735
+      ]
+    },
+    {
+      "id": "sinterklaas-paard-v1",
+      "name": "paard",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0,
+        0.23895027624309392,
+        0.40423572744014735
+      ]
+    },
+    {
+      "id": "sinterklaas-cadeautje-v1",
+      "name": "cadeautje",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.40423572744014735,
+        0.2451657458563536,
+        0.2918968692449355
+      ]
+    },
+    {
+      "id": "sinterklaas-schoen-v1",
+      "name": "schoen",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2451657458563536,
+        0.40423572744014735,
+        0.27002762430939226,
+        0.2918968692449355
+      ]
+    },
+    {
+      "id": "sinterklaas-wortel-v1",
+      "name": "wortel",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0.40423572744014735,
+        0.24585635359116023,
+        0.2918968692449355
+      ]
+    },
+    {
+      "id": "sinterklaas-pepernoot-v1",
+      "name": "pepernoot",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0.40423572744014735,
+        0.23895027624309392,
+        0.2918968692449355
+      ]
+    },
+    {
+      "id": "sinterklaas-chocoladeletter-v1",
+      "name": "chocoladeletter",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6961325966850829,
+        0.2451657458563536,
+        0.30386740331491713
+      ]
+    },
+    {
+      "id": "sinterklaas-stoomboot-v1",
+      "name": "stoomboot",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2451657458563536,
+        0.6961325966850829,
+        0.27002762430939226,
+        0.30386740331491713
+      ]
+    },
+    {
+      "id": "sinterklaas-zak-met-cadeautjes-v1",
+      "name": "zak met cadeautjes",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0.6961325966850829,
+        0.24585635359116023,
+        0.30386740331491713
+      ]
+    },
+    {
+      "id": "sinterklaas-schoorsteen-v1",
+      "name": "schoorsteen",
+      "theme": "sinterklaas",
+      "src": "./stickers/sinterklaas/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0.6961325966850829,
+        0.23895027624309392,
+        0.30386740331491713
+      ]
+    },
+    {
+      "id": "kerst-kerstboom-v1",
+      "name": "kerstboom",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.2589779005524862,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-kerstbal-v1",
+      "name": "kerstbal",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2589779005524862,
+        0,
+        0.2562154696132597,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-kerstster-v1",
+      "name": "kerstster",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0,
+        0.24585635359116023,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-cadeau-v1",
+      "name": "cadeau",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0,
+        0.23895027624309392,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-sneeuwpop-v1",
+      "name": "sneeuwpop",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.3314917127071823,
+        0.2589779005524862,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-kerstmuts-v1",
+      "name": "kerstmuts",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2589779005524862,
+        0.3314917127071823,
+        0.2562154696132597,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-rendier-v1",
+      "name": "rendier",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0.3314917127071823,
+        0.24585635359116023,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-kerstman-v1",
+      "name": "kerstman",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0.3314917127071823,
+        0.23895027624309392,
+        0.3314917127071823
+      ]
+    },
+    {
+      "id": "kerst-slee-v1",
+      "name": "slee",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6629834254143646,
+        0.2589779005524862,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "kerst-kerstkrans-v1",
+      "name": "kerstkrans",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2589779005524862,
+        0.6629834254143646,
+        0.2562154696132597,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "kerst-kaars-v1",
+      "name": "kaars",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5151933701657458,
+        0.6629834254143646,
+        0.24585635359116023,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "kerst-kerstbel-v1",
+      "name": "kerstbel",
+      "theme": "kerst",
+      "src": "./stickers/kerst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.761049723756906,
+        0.6629834254143646,
+        0.23895027624309392,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "piraten-piraat-v1",
+      "name": "piraat",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.2520718232044199,
+        0.35911602209944754
+      ]
+    },
+    {
+      "id": "piraten-piratenhoed-v1",
+      "name": "piratenhoed",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2520718232044199,
+        0,
+        0.2520718232044199,
+        0.35911602209944754
+      ]
+    },
+    {
+      "id": "piraten-piratenschip-v1",
+      "name": "piratenschip",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5041436464088398,
+        0,
+        0.24861878453038674,
+        0.35911602209944754
+      ]
+    },
+    {
+      "id": "piraten-schatkist-v1",
+      "name": "schatkist",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7527624309392266,
+        0,
+        0.2472375690607735,
+        0.35911602209944754
+      ]
+    },
+    {
+      "id": "piraten-gouden-munt-v1",
+      "name": "gouden munt",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.35911602209944754,
+        0.2520718232044199,
+        0.2992633517495396
+      ]
+    },
+    {
+      "id": "piraten-schatkaart-v1",
+      "name": "schatkaart",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2520718232044199,
+        0.35911602209944754,
+        0.2520718232044199,
+        0.2992633517495396
+      ]
+    },
+    {
+      "id": "piraten-papegaai-v1",
+      "name": "papegaai",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5041436464088398,
+        0.35911602209944754,
+        0.24861878453038674,
+        0.2992633517495396
+      ]
+    },
+    {
+      "id": "piraten-ooglapje-v1",
+      "name": "ooglapje",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7527624309392266,
+        0.35911602209944754,
+        0.2472375690607735,
+        0.2992633517495396
+      ]
+    },
+    {
+      "id": "piraten-piratenvlag-v1",
+      "name": "piratenvlag",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6583793738489871,
+        0.2520718232044199,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "piraten-anker-v1",
+      "name": "anker",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2520718232044199,
+        0.6583793738489871,
+        0.2520718232044199,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "piraten-stuurwiel-v1",
+      "name": "stuurwiel",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5041436464088398,
+        0.6583793738489871,
+        0.24861878453038674,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "piraten-eiland-v1",
+      "name": "eiland",
+      "theme": "piraten",
+      "src": "./stickers/piraten/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7527624309392266,
+        0.6583793738489871,
+        0.2472375690607735,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "restaurant-kok-v1",
+      "name": "kok",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.22790055248618785,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "restaurant-koksmuts-v1",
+      "name": "koksmuts",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.22790055248618785,
+        0,
+        0.255524861878453,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "restaurant-pan-v1",
+      "name": "pan",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.48342541436464087,
+        0,
+        0.26243093922651933,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "restaurant-bord-v1",
+      "name": "bord",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7458563535911602,
+        0,
+        0.2541436464088398,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "restaurant-vork-v1",
+      "name": "vork",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.35451197053406996,
+        0.22790055248618785,
+        0.32228360957642727
+      ]
+    },
+    {
+      "id": "restaurant-lepel-v1",
+      "name": "lepel",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.22790055248618785,
+        0.35451197053406996,
+        0.255524861878453,
+        0.32228360957642727
+      ]
+    },
+    {
+      "id": "restaurant-pizza-v1",
+      "name": "pizza",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.48342541436464087,
+        0.35451197053406996,
+        0.26243093922651933,
+        0.32228360957642727
+      ]
+    },
+    {
+      "id": "restaurant-taart-v1",
+      "name": "taart",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7458563535911602,
+        0.35451197053406996,
+        0.2541436464088398,
+        0.32228360957642727
+      ]
+    },
+    {
+      "id": "restaurant-ijsje-v1",
+      "name": "ijsje",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6767955801104972,
+        0.22790055248618785,
+        0.32320441988950277
+      ]
+    },
+    {
+      "id": "restaurant-hamburger-v1",
+      "name": "hamburger",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.22790055248618785,
+        0.6767955801104972,
+        0.255524861878453,
+        0.32320441988950277
+      ]
+    },
+    {
+      "id": "restaurant-tomaat-v1",
+      "name": "tomaat",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.48342541436464087,
+        0.6767955801104972,
+        0.26243093922651933,
+        0.32320441988950277
+      ]
+    },
+    {
+      "id": "restaurant-waterkan-v1",
+      "name": "waterkan",
+      "theme": "restaurant",
+      "src": "./stickers/restaurant/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7458563535911602,
+        0.6767955801104972,
+        0.2541436464088398,
+        0.32320441988950277
+      ]
+    },
+    {
+      "id": "sprookjes-kasteel-v1",
+      "name": "kasteel",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.26243093922651933,
+        0.3360957642725598
+      ]
+    },
+    {
+      "id": "sprookjes-prinses-v1",
+      "name": "prinses",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26243093922651933,
+        0,
+        0.24861878453038674,
+        0.3360957642725598
+      ]
+    },
+    {
+      "id": "sprookjes-prins-v1",
+      "name": "prins",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.511049723756906,
+        0,
+        0.24861878453038674,
+        0.3360957642725598
+      ]
+    },
+    {
+      "id": "sprookjes-ridder-v1",
+      "name": "ridder",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7596685082872928,
+        0,
+        0.24033149171270718,
+        0.3360957642725598
+      ]
+    },
+    {
+      "id": "sprookjes-draak-v1",
+      "name": "draak",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.3360957642725598,
+        0.26243093922651933,
+        0.3268876611418048
+      ]
+    },
+    {
+      "id": "sprookjes-kroon-v1",
+      "name": "kroon",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26243093922651933,
+        0.3360957642725598,
+        0.24861878453038674,
+        0.3268876611418048
+      ]
+    },
+    {
+      "id": "sprookjes-fee-v1",
+      "name": "fee",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.511049723756906,
+        0.3360957642725598,
+        0.24861878453038674,
+        0.3268876611418048
+      ]
+    },
+    {
+      "id": "sprookjes-toverstaf-v1",
+      "name": "toverstaf",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7596685082872928,
+        0.3360957642725598,
+        0.24033149171270718,
+        0.3268876611418048
+      ]
+    },
+    {
+      "id": "sprookjes-kabouter-v1",
+      "name": "kabouter",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6629834254143646,
+        0.26243093922651933,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "sprookjes-wolf-v1",
+      "name": "wolf",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26243093922651933,
+        0.6629834254143646,
+        0.24861878453038674,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "sprookjes-roodkapje-v1",
+      "name": "roodkapje",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.511049723756906,
+        0.6629834254143646,
+        0.24861878453038674,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "sprookjes-kikker-v1",
+      "name": "kikker",
+      "theme": "sprookjes",
+      "src": "./stickers/sprookjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7596685082872928,
+        0.6629834254143646,
+        0.24033149171270718,
+        0.3370165745856354
+      ]
+    },
+    {
+      "id": "beestjes-lieveheersbeestje-v1",
+      "name": "lieveheersbeestje",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-vlinder-v1",
+      "name": "vlinder",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.25,
+        0,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-mier-v1",
+      "name": "mier",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5,
+        0,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-spin-v1",
+      "name": "spin",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.75,
+        0,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-bij-v1",
+      "name": "bij",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.3333333333333333,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-rups-v1",
+      "name": "rups",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.25,
+        0.3333333333333333,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-slak-v1",
+      "name": "slak",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5,
+        0.3333333333333333,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-regenworm-v1",
+      "name": "regenworm",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.75,
+        0.3333333333333333,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-kever-v1",
+      "name": "kever",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6666666666666666,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-libel-v1",
+      "name": "libel",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.25,
+        0.6666666666666666,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-bloem-v1",
+      "name": "bloem",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5,
+        0.6666666666666666,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "beestjes-blad-v1",
+      "name": "blad",
+      "theme": "beestjes",
+      "src": "./stickers/beestjes/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.75,
+        0.6666666666666666,
+        0.25,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "winter-sneeuwvlok-v1",
+      "name": "sneeuwvlok",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0,
+        0.2589779005524862,
+        0.3453038674033149
+      ]
+    },
+    {
+      "id": "winter-sneeuwpop-v1",
+      "name": "sneeuwpop",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2589779005524862,
+        0,
+        0.2589779005524862,
+        0.3453038674033149
+      ]
+    },
+    {
+      "id": "winter-want-v1",
+      "name": "want",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5179558011049724,
+        0,
+        0.23480662983425415,
+        0.3453038674033149
+      ]
+    },
+    {
+      "id": "winter-muts-v1",
+      "name": "muts",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7527624309392266,
+        0,
+        0.2472375690607735,
+        0.3453038674033149
+      ]
+    },
+    {
+      "id": "winter-sjaal-v1",
+      "name": "sjaal",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.3453038674033149,
+        0.24861878453038674,
+        0.31307550644567217
+      ]
+    },
+    {
+      "id": "winter-slee-v1",
+      "name": "slee",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.24861878453038674,
+        0.3453038674033149,
+        0.28314917127071826,
+        0.31307550644567217
+      ]
+    },
+    {
+      "id": "winter-schaats-v1",
+      "name": "schaats",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5317679558011049,
+        0.3453038674033149,
+        0.22790055248618785,
+        0.31307550644567217
+      ]
+    },
+    {
+      "id": "winter-ijspegel-v1",
+      "name": "ijspegel",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7596685082872928,
+        0.3453038674033149,
+        0.24033149171270718,
+        0.31307550644567217
+      ]
+    },
+    {
+      "id": "winter-winterboom-v1",
+      "name": "winterboom",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0,
+        0.6583793738489871,
+        0.2589779005524862,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "winter-pinguïn-v1",
+      "name": "pinguïn",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.2589779005524862,
+        0.6583793738489871,
+        0.22790055248618785,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "winter-ijsbeer-v1",
+      "name": "ijsbeer",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.48687845303867405,
+        0.6583793738489871,
+        0.26588397790055246,
+        0.3416206261510129
+      ]
+    },
+    {
+      "id": "winter-vogel-in-de-sneeuw-v1",
+      "name": "vogel in de sneeuw",
+      "theme": "winter",
+      "src": "./stickers/winter/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7527624309392266,
+        0.6583793738489871,
+        0.2472375690607735,
+        0.3416206261510129
+      ]
     }
   ]
 }
+

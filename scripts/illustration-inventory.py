@@ -1,7 +1,7 @@
 from pathlib import Path
 import re,json
 s=Path('src/model.ts').read_text(encoding='utf-8-sig')
-provided={x['name'] for x in json.loads(Path('public/stickers/manifest.json').read_text())['stickers']}
+provided={(x['theme'],x['name']) for x in json.loads(Path('public/stickers/manifest.json').read_text(encoding='utf-8-sig'))['stickers']}
 palettes={'herfst':'oker, roestbruin, mosgroen en paars','sinterklaas':'warm rood, goud en crème','kerst':'dennengroen, cranberryrood en goud','piraten':'turkoois, roodbruin en zandgeel','restaurant':'tomaatrood, botergeel en zachtblauw','sprookjes':'lavendel, roze, mosgroen en goud','beestjes':'bladgroen, geel en koraal','winter':'ijsblauw, crème, perzik en lila'}
 detail={
 'heks':'vriendelijk kindfiguur met paarse hoed, oranje jurk en toverstaf; volledig lijf', 'heksenhoed':'kromme paarse hoed met oranje lint; losse hoed zonder hoofd','bezem':'diagonale houten bezem met gouden stroborstel','heksenketel':'ronde blauwgroene ketel met goudgele bellen','toverboek':'opengeslagen boek met maan en sterren; geen leesbare tekst','toverstaf':'houten stok met gouden ster; enkele losse glinsteringen','paddenstoel':'rode hoed met crèmekleurige stippen en ronde steel','eikel':'één eikel met herkenbare geschubde dop','kastanje':'glanzende bruine kastanje in halfopen groene bolster','herfstblad':'één goudoranje esdoornblad met korte steel','egel':'glimlachende egel in zijaanzicht met zachte bruine stekels','uil':'ronde uil met grote ogen op korte tak','spin':'vriendelijke ronde spin met acht herkenbare poten','vleermuis':'kleine vriendelijke vleermuis met gespreide vleugels','eekhoorn':'zittende oranje eekhoorn met pluimstaart en noot','boom':'losse boom met stam en herfstkroon; geen achtergrondbos','maan':'gouden sikkelmaan met slaperig vriendelijk gezicht','toverster':'grote gouden ster met twee kleine glinsteringen',
@@ -18,8 +18,11 @@ for theme,title,assets in re.findall(r"\{id:'([^']+)',name:'([^']+)',challenge:'
  names=re.findall(r"'([^']+)'",assets);total+=len(names)
  lines += [f'## {title} ({len(names)} gepland)', '',f'Palet: {palettes[theme]}.', '', '| Gewenst bestand onder public/stickers/ | Afmetingen | Beeldbeschrijving | Status |','|---|---|---|---|']
  for name in names:
-  fn=name.replace(' ','-');status='aanwezig als atlasuitsnede; 1024-master ontbreekt' if theme=='herfst' and name in provided else '**ontbreekt**'
+  fn=name.replace(' ','-');status='aanwezig als atlasuitsnede; 1024-master ontbreekt' if (theme,name) in provided else '**ontbreekt**'
   lines.append(f'| `{theme}/{fn}.png` | 1024 × 1024 | {detail.get(name,name)} | {status} |')
  lines.append('')
 lines += [f'Totaal: {total} geplande illustraties; 12 aanwezig als gegenereerde atlasuitsnede, {total-12} geheel ontbrekend.','', '## Opnemen in de app','', 'Voeg `{id,name,theme,src,enabled}` toe aan `public/stickers/manifest.json`. Gebruik een stabiel versie-ID. Optioneel bevat `crop` vier genormaliseerde getallen `[x,y,breedte,hoogte]`. Nieuwe stickers worden eenmaal lokaal ingevoerd. De leerkracht kan thema’s kiezen en stickers hernoemen, uitschakelen of verwijderen. Verwijderde meegeleverde stickers komen niet na iedere herstart terug; bestaande tekeningen blijven hun eigen afbeelding bevatten.']
+lines[2]=f'Er zijn **{len(provided)} gegenereerde stickers** meegeleverd, verdeeld over {len({theme for theme,name in provided})} thema’s. De catalogi plannen 15–18 beelden per thema. De onderstaande losse bestandsnamen zijn leveringsdoelen; aanwezige afbeeldingen worden uit stickervellen geladen.'
+lines=[line.replace('De twaalf gegenereerde beelden','De gegenereerde beelden').replace('De huidige herfstuitsneden zijn circa 350 px.','De huidige atlasuitsneden zijn circa 300–450 px.').replace('`herfst/stickervel.png`','`<thema>/stickervel.png`') for line in lines]
+lines=[f'Totaal: {total} geplande illustraties; {len(provided)} aanwezig als gegenereerde atlasuitsnede, {total-len(provided)} geheel ontbrekend.' if line.startswith('Totaal:') else line for line in lines]
 Path('ILLUSTRATIES.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')

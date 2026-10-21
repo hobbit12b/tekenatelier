@@ -37,3 +37,7 @@ Alle actieknoppen gebruiken nu de krijtillustraties uit `public/art/actions.png`
 ## Verbeteringsronde 21 oktober 2026
 
 Dit historische verslag wordt aangevuld door `VERBETERINGEN.md`, met de actuele 26 kerntests, 15 regressiecontroles, aanvullende touch-/race-/stickercontroles en de tablet- en offlinecontrole. Twaalf gegenereerde herfststickers zijn inmiddels aanwezig; de resterende beeldbestanden staan precies in `ILLUSTRATIES.md`. De eerdere vermelding dat alle themastickers ontbreken geldt dus voor de oorspronkelijke versie.
+
+## Aanvulling 21 oktober: acht stickercollecties
+
+96 stickers (12 per thema), alle PNG-uitsneden gedecodeerd en op transparantie gecontroleerd; overzicht visueel beoordeeld. TypeScript, productiebuild, quality-test en offline-test geslaagd. Offlinecontrole laadt alle acht stickervellen en exporteert een heropend werk als PDF. Testoverzicht: scripts/sticker-collections-test.mjs. Testserver was aanvankelijk onbereikbaar vanuit de browser; na herstart buiten de sandbox slaagden de controles. Geen fysieke iPad-test uitgevoerd.

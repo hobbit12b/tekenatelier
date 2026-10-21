@@ -66,7 +66,7 @@ Na afronden bewondert het kind het kunstwerk en kiest het museum, een nieuw vel 
 
 ## Professionele illustraties toevoegen
 
-Er zijn twaalf met ImageGen gemaakte herfstillustraties meegeleverd als transparant stickervel. Ze worden bij eerste gebruik afzonderlijk ingevoerd en blijven in bestaande tekeningen behouden als de leerkracht ze uit de bibliotheek verwijdert. De zeven andere thema’s hebben nog geen meegeleverde illustraties. `ILLUSTRATIES.md` bevat het volledige overzicht met ontbrekende bestanden, doelafmetingen en beeldbeschrijvingen. De startcollectie is circa 350 pixels per sticker; voor hoogwaardig groot drukwerk zijn grotere masters nodig.
+Er zijn 96 met ImageGen gemaakte illustraties meegeleverd als acht transparante stickervellen: twaalf stickers per thema. Ze worden bij eerste gebruik afzonderlijk ingevoerd en blijven in bestaande tekeningen behouden als de leerkracht ze uit de bibliotheek verwijdert. Alle acht thema’s hebben een startcollectie; 32 extra catalogusbeelden ontbreken nog. `ILLUSTRATIES.md` bevat het volledige overzicht met ontbrekende bestanden, doelafmetingen en beeldbeschrijvingen. De startcollectie is circa 300–450 pixels per sticker; voor hoogwaardig groot drukwerk zijn grotere masters nodig.
 
 Voor algemene, meegeleverde stickers:
 

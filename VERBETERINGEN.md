@@ -13,7 +13,7 @@ De bestaande React/TypeScript-app is uitgebreid, zonder leeftijdsstanden. Alle z
 - **Canvas:** pointerbewegingen worden per animatieframe gebundeld. Toegevoegde streken worden waar mogelijk op de bestaande tekening gerenderd. Tijdens objectverplaatsing wordt een aparte onderlaag hergebruikt. Pointercancel stopt het actieve gebaar. Touch-action en overscroll zijn begrensd rond de tekenbediening.
 - **Vullen en geheugen:** de bestaande tolerantievulling draait in een Worker met overdracht van de pixelbuffer en een tijdslimiet. Kleine openingen blijven ondersteund. De gedecodeerde afbeeldingcache is begrensd op 32 MiB/24 entries, behalve één eventueel groter bronbeeld. Geschiedenis deelt onveranderde lagen; die worden niet per undo diep gekopieerd. Zeer veel unieke, complexe vulrasters kunnen nog steeds veel projectgeheugen innemen; er is bewust geen destructieve afvlakking van bewerkbare lagen.
 - **Glitter:** geen animatielus zonder glitter en zonder gekozen glitterpen; verborgen tabbladen stoppen de animatielus en hervatten bij zichtbaarheid. De bestaande limiet op sterren en verminderde-beweginginstelling blijven bestaan.
-- **Stickers:** twaalf transparante herfstillustraties zijn echt aanwezig. De loader maakt zelfstandige PNG’s, wacht op beelddecodering en importeert ieder ID eenmaal. Verwijdering, aangepaste naam en beschikbaarheid door de leerkracht worden gerespecteerd. De zeven andere thema’s zijn nog niet geïllustreerd: zie `ILLUSTRATIES.md`.
+- **Stickers:** 96 transparante illustraties zijn echt aanwezig: twaalf per thema. De loader maakt zelfstandige PNG’s, wacht op beelddecodering en importeert ieder ID eenmaal. Verwijdering, aangepaste naam en beschikbaarheid door de leerkracht worden gerespecteerd. Alle acht thema’s hebben een startcollectie. Zie `ILLUSTRATIES.md` voor 32 aanvullende beelden en de nog ontbrekende drukwerkmasters.
 - **Objectbediening:** éénvingerslepen plus grote knoppen voor schalen, draaien, kopiëren en verwijderen. Schalen begrenst één gezamenlijke factor, zodat de verhouding ook bij de minimale/maximale maat blijft kloppen. Stempels blijven na plaatsing actief; voorbeeld en kleur blijven boven het blad zichtbaar. Een tik op een materiaal gaat terug naar vrij tekenen.
 - **Zelfstandige bediening:** duidelijkere gekozen kleur en materiaal, visuele achtergrondstaaltjes, echte vormvoorbeelden, visuele uitleg voor één sticker tegenover herhaald stempelen. De belangrijkste knoppen zijn op drie tabletformaten geometrisch gecontroleerd.
 - **Mengen:** twee verfkleuren bewegen samen naar één resultaat; daarna kan direct getekend worden. Geen punten, verplichte voorspelling of goed/fout-feedback. De vijf bestaande RYB-tests blijven gelden. Dit model leert primaire mengrelaties; het simuleert geen echte pigmenten, transparantie of complementaire verfmengsels nauwkeurig.
@@ -55,7 +55,7 @@ Indicatief gemiddelde: **8,6/10**. Een onderbouwde 9,5 is met alleen code en bro
 
 ## Tweede evaluatie en resterende zwakke punten
 
-Na de eerste testreeks zijn de achtergrondexport, camera-requestrace en verhouding bij minimaal schalen verder aangescherpt. De herhaalde tests controleren die wijzigingen. De resterende grootste beperkingen zijn nu extern of inhoudelijk: ontbrekende themabeelden, echte iPad-prestaties en zelfstandig gebruik door kleuters. Deze worden niet met extra fictieve illustraties of een automatisch hoger cijfer verhuld.
+Na de eerste testreeks zijn de achtergrondexport, camera-requestrace en verhouding bij minimaal schalen verder aangescherpt. De herhaalde tests controleren die wijzigingen. De resterende grootste beperkingen zijn nu extern of inhoudelijk: aanvullende themabeelden en drukwerkmasters, echte iPad-prestaties en zelfstandig gebruik door kleuters. Deze worden niet met extra fictieve illustraties of een automatisch hoger cijfer verhuld.
 
 ## Korte praktijkproef (echte iPad 9)
 
@@ -73,3 +73,9 @@ Gebruik geen leerlingfoto’s of namen. Laat 3–5 kinderen uit groep 1 en 3–5
 10. Test vliegtuigmodus, opnieuw starten, 500+ streken, veel vullingen/glitter en weinig vrije opslag. Controleer opgeslagen werk na geforceerd afsluiten; noteer wat niet kan worden gegarandeerd.
 
 Registreer tijd tot eerste tekening, aantal benodigde hulpinterventies, gemiste tikken, teruggevonden kunstwerken en technische fouten. Streef naar geen dataverlies en zelfstandig voltooien van de kernhandelingen bij ten minste 80% van de kinderen in deze eerste kleine proef; behandel dit als ontwikkelcriterium, niet als wetenschappelijk bewijs. Verbeter op basis van observaties voordat een definitieve score wordt gegeven.
+
+## Aanvulling: acht stickercollecties
+
+Zeven nieuwe transparante stickervellen voegen 84 illustraties toe. Elk van de acht thema’s heeft nu twaalf stickers. De leerkracht bepaalt welke thema’s zichtbaar zijn; bestaande keuzes en verwijderingen blijven behouden. De inventarisgenerator controleert nu combinaties van thema en naam, zodat een sneeuwpop bij kerst niet ten onrechte als winterillustratie wordt meegeteld. De voorlopige beoordeling blijft 8,6: gebruiksonderzoek en fysieke iPad-tests zijn nog niet uitgevoerd.
+
+Validatie van deze aanvulling: TypeScript en productiebuild geslaagd; acht collecties met ieder twaalf gedecodeerde transparante afbeeldingen gecontroleerd en visueel bekeken. De uitgebreide browserproef slaagt met 96 stickers, snelle plaatsing, schalen, touch, vullen, bewaren en blijvende verwijdering. De productie-offlineproef slaagt met alle acht atlasbestanden, heropenen en PDF-export; de cache bevat 28 algemene appbestanden.
