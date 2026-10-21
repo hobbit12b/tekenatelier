@@ -33,3 +33,11 @@ De professionele themastickers zijn niet meegeleverd. De acht volledige catalogi
 Kleine onderbrekingen (circa 10 tekenpixels) worden in het detectiemasker gesloten; de zichtbare lijn blijft intact. De vulkleur vervangt ook de achtergrondbijdrage van zachte randpixels om witte naden te verminderen. Vier extra kerntests controleren kleine/grote openingen, de antialiasrand en een leeg blad. `scripts/fill-test.mjs` controleert een echte canvaslijn met een opening en de aansluiting van de vulling.
 
 Alle actieknoppen gebruiken nu de krijtillustraties uit `public/art/actions.png`, inclusief vullen, mengen, home, vormen, stickers, stempels, tekst, geschiedenis en dialoogknoppen. De zes bestaande materiaalillustraties blijven behouden.
+
+## Verbeteringsronde 21 oktober 2026
+
+Dit historische verslag wordt aangevuld door `VERBETERINGEN.md`, met de actuele 26 kerntests, 15 regressiecontroles, aanvullende touch-/race-/stickercontroles en de tablet- en offlinecontrole. Twaalf gegenereerde herfststickers zijn inmiddels aanwezig; de resterende beeldbestanden staan precies in `ILLUSTRATIES.md`. De eerdere vermelding dat alle themastickers ontbreken geldt dus voor de oorspronkelijke versie.
+
+## Aanvulling 21 oktober: acht stickercollecties
+
+96 stickers (12 per thema), alle PNG-uitsneden gedecodeerd en op transparantie gecontroleerd; overzicht visueel beoordeeld. TypeScript, productiebuild, quality-test en offline-test geslaagd. Offlinecontrole laadt alle acht stickervellen en exporteert een heropend werk als PDF. Testoverzicht: scripts/sticker-collections-test.mjs. Testserver was aanvankelijk onbereikbaar vanuit de browser; na herstart buiten de sandbox slaagden de controles. Geen fysieke iPad-test uitgevoerd.

@@ -46,7 +46,7 @@ Open **leerkracht** op het startscherm. Bij het eerste gebruik stel je een code 
 
 Er zijn acht thema's: herfst in het heksenbos, sinterklaas, kerst, piraten, restaurant, sprookjes, kriebelbeestjes en winter. Combineer thema's door meerdere vakjes aan te zetten. Importeer PNG- of WebP-stickers en kies per sticker of kinderen die mogen gebruiken. Je kunt stickers bekijken, hernoemen en verwijderen. Een verwijderde bibliotheeksticker blijft behouden in tekeningen waarin deze al geplaatst is.
 
-Onder instellingen kies je de gereedschappen, liggend A4 of een vierkant tekenblad, een zacht afrondingsgeluid en een optionele themaopdracht. Instellingen blijven lokaal. Projectbeheer toont ook versleutelde fotoprojecten, die nooit in de kindergalerij staan. Ontgrendel, hervat of verwijder ze hier. Voor afronden open je het project en kies je **klaar!**. Gewone tekeningen kunnen samen als ZIP met PNG's worden geëxporteerd.
+Alle gereedschappen blijven voor alle kinderen beschikbaar. Onder instellingen kies je liggend A4 of een vierkant tekenblad, een zacht afrondingsgeluid en een optionele themaopdracht. Instellingen blijven lokaal. Projectbeheer toont ook versleutelde fotoprojecten, die nooit in de kindergalerij staan. Ontgrendel, hervat of verwijder ze hier. Voor afronden open je het project en kies je **klaar!**. Gewone tekeningen kunnen samen als ZIP met PNG's worden geëxporteerd.
 
 ## Foto's en privacy
 
@@ -62,11 +62,11 @@ Een browser kan geen forensische verwijdering bewijzen: apparaatback-ups, geheug
 
 ## Export
 
-Na afronden zijn PNG, JPG en een afdrukbare A4-PDF beschikbaar. Rasterexport is 3508 pixels breed; verhouding en achtergrond blijven behouden. De originele foto, selectieomranding en spiegelhulplijn worden nooit geëxporteerd. **delen / bestanden** gebruikt het apparaatdeelmenu als dat bestanden ondersteunt; anders volgt een download. Als een browser delen na de exportberekening weigert, gebruik dan de aparte downloadknoppen. Op de iPad kun je bestanden in Bestanden bewaren; voor Windows kies je zelf een door school toegestane overdrachtsmethode.
+Na afronden bewondert het kind het kunstwerk en kiest het museum, een nieuw vel of verder tekenen. Bij leerkracht → projecten → bewaren / delen zijn PNG, JPG en een afdrukbare A4-PDF beschikbaar. Kies een type en daarna downloaden of delen; die tweede tik houdt de native deelhandeling direct gekoppeld aan een gebruikersactie. Rasterexport is 3508 pixels breed; verhouding en achtergrond blijven behouden. De originele foto, selectieomranding en spiegelhulplijn worden nooit geëxporteerd. **delen / bestanden** gebruikt het apparaatdeelmenu als dat bestanden ondersteunt; anders volgt een download. Als een browser delen na de exportberekening weigert, gebruik dan de aparte downloadknoppen. Op de iPad kun je bestanden in Bestanden bewaren; voor Windows kies je zelf een door school toegestane overdrachtsmethode.
 
 ## Professionele illustraties toevoegen
 
-Er zijn bewust geen generieke emoji of namaakfiguren als themastickers geleverd. De acht catalogi met gewenste illustraties staan in `src/model.ts`; de bibliotheek werkt met eigen geïmporteerde illustraties. Lever voor de visuele eindversie bij voorkeur minimaal acht samenhangende kinderboekillustraties per thema aan, als transparante PNG/WebP van circa 800–1200 pixels. De startkaarten gebruiken eenvoudige papieren interfaceillustraties; deze zijn geen themastickers.
+Er zijn 96 met ImageGen gemaakte illustraties meegeleverd als acht transparante stickervellen: twaalf stickers per thema. Ze worden bij eerste gebruik afzonderlijk ingevoerd en blijven in bestaande tekeningen behouden als de leerkracht ze uit de bibliotheek verwijdert. Alle acht thema’s hebben een startcollectie; 32 extra catalogusbeelden ontbreken nog. `ILLUSTRATIES.md` bevat het volledige overzicht met ontbrekende bestanden, doelafmetingen en beeldbeschrijvingen. De startcollectie is circa 300–450 pixels per sticker; voor hoogwaardig groot drukwerk zijn grotere masters nodig.
 
 Voor algemene, meegeleverde stickers:
 
@@ -85,7 +85,7 @@ Import accepteert alleen PNG/WebP-stickers tot 12 MB. Foto's mogen daarnaast JPG
 
 React/TypeScript/Vite voor interface en builds; Canvas 2D voor tekenmaterialen en compositing. Een eigen gestructureerd objectmodel maakt tekenwerk bewerkbaar en houdt de foto buiten de tekenengine. IndexedDB voor projecten, instellingen en stickers. De vulfunctie gebruikt een begrensde queue en kleurtolerantie. Export wordt op een afzonderlijk canvas op hogere resolutie opgebouwd. Geen CDN-afhankelijkheden tijdens gebruik.
 
-Bestanden zijn verdeeld over model, tekenengine, canvas-interactie, export, bestandeninvoer, encryptie/opslag, camera, leerkrachtomgeving en interface. In deze eerste versie zijn de creatieve opdrachtkaarten tekstueel; geïllustreerde opdrachtkaarten en professionele themastickers moeten nog worden aangeleverd. Flood-fill en het opnieuw renderen van zeer grote tekeningen draaien op de hoofdthread: prestaties op een fysieke iPad 9 moeten nog worden gemeten. Er is nog geen versleutelde projectback-up/import buiten de browser; export levert afgeplatte kunstwerken. Cameragedrag, delen en OS-opslagbeheer verschillen per iPadOS-versie.
+Bestanden zijn verdeeld over model, tekenengine, canvas-interactie, export, bestandeninvoer, encryptie/opslag, camera, leerkrachtomgeving en interface. De optionele themaopdrachten hebben een gereedschapssymbool en tekst; volledige picturale verhaalkaarten en de ontbrekende themacollecties staan nog op de illustratielijst. Flood-fill rekent in een Web Worker. Nieuwe streken worden waar mogelijk toegevoegd aan het bestaande canvas; live tekenen wordt per animatieframe gebundeld. De gedecodeerde afbeeldingcache is begrensd op 32 MiB en 24 entries (één uitzonderlijk grote afbeelding kan de bytegrens overschrijden). Pixeluitlezen, PNG-coderen en export blijven deels op de hoofdthread; prestaties op een fysieke iPad 9 moeten nog worden gemeten. Er is nog geen versleutelde projectback-up/import buiten de browser; export levert afgeplatte kunstwerken. Cameragedrag, delen en OS-opslagbeheer verschillen per iPadOS-versie.
 
 ## Tests en fysieke iPad-controle
 
@@ -104,3 +104,9 @@ Controleer vóór inzet in de klas op een fysieke iPad 9:
 9. Opslag vol of ontoegankelijk: foutmelding, nooit een onterechte succesmelding. Controleer ook wat er gebeurt bij geforceerd afsluiten.
 
 Gebruik geen leerlingfoto's voor ontwikkeling of automatische tests.
+
+## Verbeteringsronde 21 oktober 2026
+
+Zie `VERBETERINGEN.md` voor wijzigingen, testbewijs, voorlopige beoordeling en praktijkchecklist. De ontwikkelbranch is `verbeteringen-kleuteratelier`; alleen main publiceert naar GitHub Pages. Nieuwe herkenningsplaatjes zijn optioneel en bevatten geen naam of leerlingnummer. De galerij kan daarop filteren.
+
+Aanvullende browsertests: `scripts/quality-test.mjs`, `scripts/fill-test.mjs`, `scripts/sparkle-test.mjs`, `scripts/offline-test.mjs`. De eerste drie gebruiken de lokale Vite-server op poort 5174; de offlinetest serveert zelfstandig de productiebuild op 5180.

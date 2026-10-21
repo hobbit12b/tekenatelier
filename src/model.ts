@@ -5,7 +5,7 @@ export type ShapeName = 'cirkel'|'vierkant'|'rechthoek'|'driehoek'|'ovaal'|'ruit
 export type Item = {kind:'shape'|'text'|'sticker';id:string;x:number;y:number;w:number;h:number;rotation:number;color:string;filled:boolean;shape?:ShapeName;text?:string;font?:string;src?:string};
 export type Fill = {kind:'fill';id:string;src:string};
 export type Mark = Stroke|Item|Fill;
-export type Drawing = {version:1;id:string;name:string;created:number;updated:number;width:number;height:number;background:string;marks:Mark[];colors:string[];status:'draft'|'finished'};
+export type Drawing = {version:1;id:string;name:string;badge?:string;created:number;updated:number;width:number;height:number;background:string;marks:Mark[];colors:string[];status:'draft'|'finished'};
 export type Photo = {src:string;x:number;y:number;w:number;h:number;opacity:number;visible:boolean};
 export type Envelope = {salt:number[];iv:number[];cipher:number[]};
 export type RecordData = {id:string;updated:number;private:boolean;drawing?:Drawing;sealed?:Envelope;thumbnail?:string};
@@ -30,4 +30,4 @@ export const uid=()=>crypto.randomUUID();
 export function createDrawing(settings=defaults):Drawing {return {version:1,id:uid(),name:'mijn tekening',created:Date.now(),updated:Date.now(),width:settings.size==='vierkant'?900:1200,height:settings.size==='vierkant'?900:848,background:settings.background,marks:[],colors:[],status:'draft'};}
 export function validateDrawing(value:unknown):Drawing {const d=value as Drawing;if(!d||d.version!==1||!d.id||!Array.isArray(d.marks)||d.marks.length>20000||!Number.isFinite(d.width)||d.width<1||d.width>4000||!Number.isFinite(d.height)||d.height<1||d.height>4000)throw Error('dit project is beschadigd of heeft een onbekende versie');return d;}
 // Explicit allowlist: photo fields can never become part of export or public storage.
-export function cleanDrawing(d:Drawing):Drawing {return {version:1,id:d.id,name:d.name,created:d.created,updated:d.updated,width:d.width,height:d.height,background:d.background,marks:structuredClone(d.marks),colors:[...d.colors],status:d.status};}
+export function cleanDrawing(d:Drawing):Drawing {return {version:1,id:d.id,name:d.name,...(['egel','uil','eekhoorn','blad','maan','ster'].includes(d.badge||'')?{badge:d.badge}:{}),created:d.created,updated:d.updated,width:d.width,height:d.height,background:d.background,marks:structuredClone(d.marks),colors:[...d.colors],status:d.status};}
