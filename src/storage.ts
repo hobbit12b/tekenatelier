@@ -8,6 +8,14 @@ function db(){return pending??=new Promise<IDBDatabase>((resolve,reject)=>{const
 export async function transact<T>(store:string,mode:IDBTransactionMode,run:(s:IDBObjectStore)=>IDBRequest):Promise<T>{const database=await db();return new Promise((resolve,reject)=>{const tx=database.transaction(store,mode),r=run(tx.objectStore(store));let result:T;r.onsuccess=()=>{result=r.result;};tx.oncomplete=()=>resolve(result);tx.onerror=tx.onabort=()=>reject(Error('bewaren is niet gelukt. controleer de vrije opslagruimte en probeer opnieuw.'));});}
 export const allRecords=()=>transact<RecordData[]>('projects','readonly',s=>s.getAll());
 export const deleteProject=(id:string)=>transact('projects','readwrite',s=>s.delete(id));
-export async function savePublic(d:Drawing,thumbnail:string){const record:RecordData={id:d.id,updated:Date.now(),private:false,drawing:cleanDrawing(d),thumbnail};await transact('projects','readwrite',s=>s.put(record));}
+export async function savePublic(d:Drawing,thumbnail:string){
+ const record:RecordData={id:d.id,updated:Date.now(),private:false,drawing:cleanDrawing(d),thumbnail};
+ const database=await db();
+ await new Promise<void>((resolve,reject)=>{
+  const tx=database.transaction('projects','readwrite'),store=tx.objectStore('projects'),request=store.get(d.id);
+  request.onsuccess=()=>{const previous=request.result as RecordData|undefined;if((previous?.drawing?.updated??-1)<=d.updated)store.put(record);};
+  tx.oncomplete=()=>resolve();tx.onerror=tx.onabort=()=>reject(Error('bewaren is niet gelukt. controleer de vrije opslagruimte en probeer opnieuw.'));
+ });
+}
 export async function savePrivate(d:Drawing,photo:Photo,phrase:string){const sealed=await seal({drawing:cleanDrawing(d),photo},phrase);await transact('projects','readwrite',s=>s.put({id:d.id,updated:Date.now(),private:true,sealed}));}
 export async function openPrivate(record:RecordData,phrase:string){if(!record.private||!record.sealed)throw Error('ongeldig fotoproject');const value=await unseal<{drawing:Drawing;photo:Photo}>(record.sealed,phrase);validateDrawing(value.drawing);if(!value.photo?.src?.startsWith('data:image/'))throw Error('de foto is beschadigd');return value;}

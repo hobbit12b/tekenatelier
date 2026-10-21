@@ -1,1 +1,161 @@
-{"version":1,"stickers":[],"instructions":"Voeg PNG/WebP-illustraties toe onder stickers/<thema>/. Entries: {id,name,theme,src,enabled}. src is relatief aan de app, bijvoorbeeld ./stickers/herfst/egel.png. Thema’s: herfst, sinterklaas, kerst, piraten, restaurant, sprookjes, beestjes, winter. Gebruik alleen algemene illustraties zonder leerlinggegevens."}
+{
+  "version": 2,
+  "stickers": [
+    {
+      "id": "herfst-heks-v1",
+      "name": "heks",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.0,
+        0.0,
+        0.26035911602209943,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "herfst-heksenhoed-v1",
+      "name": "heksenhoed",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26035911602209943,
+        0.0,
+        0.24930939226519336,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "herfst-bezem-v1",
+      "name": "bezem",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5096685082872928,
+        0.0,
+        0.2541436464088398,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "herfst-heksenketel-v1",
+      "name": "heksenketel",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7638121546961326,
+        0.0,
+        0.2361878453038674,
+        0.35451197053406996
+      ]
+    },
+    {
+      "id": "herfst-paddenstoel-v1",
+      "name": "paddenstoel",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.0,
+        0.35451197053406996,
+        0.26035911602209943,
+        0.31123388581952116
+      ]
+    },
+    {
+      "id": "herfst-egel-v1",
+      "name": "egel",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26035911602209943,
+        0.35451197053406996,
+        0.24930939226519336,
+        0.31123388581952116
+      ]
+    },
+    {
+      "id": "herfst-uil-v1",
+      "name": "uil",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5096685082872928,
+        0.35451197053406996,
+        0.2541436464088398,
+        0.31123388581952116
+      ]
+    },
+    {
+      "id": "herfst-eekhoorn-v1",
+      "name": "eekhoorn",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7638121546961326,
+        0.35451197053406996,
+        0.2361878453038674,
+        0.31123388581952116
+      ]
+    },
+    {
+      "id": "herfst-herfstblad-v1",
+      "name": "herfstblad",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.0,
+        0.6657458563535912,
+        0.26035911602209943,
+        0.3342541436464088
+      ]
+    },
+    {
+      "id": "herfst-eikel-v1",
+      "name": "eikel",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.26035911602209943,
+        0.6657458563535912,
+        0.24930939226519336,
+        0.3342541436464088
+      ]
+    },
+    {
+      "id": "herfst-maan-v1",
+      "name": "maan",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.5096685082872928,
+        0.6657458563535912,
+        0.2541436464088398,
+        0.3342541436464088
+      ]
+    },
+    {
+      "id": "herfst-toverster-v1",
+      "name": "toverster",
+      "theme": "herfst",
+      "src": "./stickers/herfst/stickervel.png",
+      "enabled": true,
+      "crop": [
+        0.7638121546961326,
+        0.6657458563535912,
+        0.2361878453038674,
+        0.3342541436464088
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ function box(mask:Uint8Array,w:number,h:number,r:number,dilate:boolean){
 export function fillPixels(a:Uint8ClampedArray,w:number,h:number,x:number,y:number,rgb:number[],gapRadius=5){
  const seed=Math.max(0,Math.min(h-1,Math.round(y)))*w+Math.max(0,Math.min(w-1,Math.round(x))),target=Array.from(a.slice(seed*4,seed*4+3));
  const difference=new Uint8Array(w*h),barrier=new Uint8Array(w*h);
- for(let n=0;n<barrier.length;n++){difference[n]=Math.max(...target.map((v,j)=>Math.abs(v-a[n*4+j])));barrier[n]=+(difference[n]>36);}
+ for(let n=0;n<barrier.length;n++){difference[n]=Math.max(Math.abs(target[0]-a[n*4]),Math.abs(target[1]-a[n*4+1]),Math.abs(target[2]-a[n*4+2]));barrier[n]=+(difference[n]>36);}
  const closed=box(box(barrier,w,h,gapRadius,true),w,h,gapRadius,false);
  // A very narrow region can disappear during closing. Keep it usable.
  const boundary=closed[seed]?barrier:closed;
