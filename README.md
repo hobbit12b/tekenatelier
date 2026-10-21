@@ -1,6 +1,6 @@
 # tekenatelier
 
-Een lokale tekenapp voor groep 1–2, gemaakt voor liggend gebruik op een iPad. De appnaam is altijd **tekenatelier**. Geen backend, accounts, analytics, advertenties, externe afbeeldingen tijdens gebruik of cloudopslag van projecten.
+Een lokale tekenapp voor groep 1–2, gemaakt voor liggend en staand gebruik op een iPad. De appnaam is altijd **tekenatelier**. Geen backend, accounts, analytics, advertenties, externe afbeeldingen tijdens gebruik of cloudopslag van projecten.
 
 ## Starten en bouwen
 
@@ -21,7 +21,7 @@ De productieversie staat in `dist/`. De relatieve Vite-basis, manifest-URL's en 
 ## Op de iPad
 
 1. Open de gepubliceerde HTTPS-URL in Safari.
-2. Wacht tot op het startscherm **klaar voor offline tekenen** verschijnt.
+2. Laat de app de eerste keer online volledig laden, zodat de serviceworker alle appbestanden kan bewaren.
 3. Gebruik Delen → Zet op beginscherm.
 4. Open het beginschermicoon en controleer eenmaal met vliegtuigmodus of het atelier opent.
 
@@ -34,11 +34,11 @@ Updates worden pas actief wanneer de oude appvensters gesloten zijn. Projecten s
 - Glitterlijnen hebben geanimeerde vierpuntsterretjes, ook na het tekenen. Bij verminderde beweging staan deze stil. PNG/JPG/PDF bewaren de glinsteringen als stilstaand beeld. Gummen en undo verwijderen ook de bijbehorende animatie.
 - **mengen** gebruikt een educatief RYB-kleurmodel: geel en blauw geven groen, rood en geel oranje, rood en blauw paars. Wit maakt lichter, zwart donkerder. Dit is een begrijpelijk leermodel, geen natuurkundige pigmentsimulatie.
 - Gemengde kleuren blijven in het project bewaard. De laatst gemaakte zestien eigen kleuren zijn beschikbaar.
-- Plaats vormen, tekst of stickers. Kies het pijltje om objecten later opnieuw te selecteren en te verplaatsen. Gebruik +, −, draaien, dupliceren en verwijderen. Twee vingers schalen/draaien een geselecteerd object.
+- Plaats vormen, tekst of afbeeldingen als stempel. Kies het pijltje om objecten later opnieuw te selecteren en te verplaatsen. Gebruik +, −, draaien, dupliceren en verwijderen. De witte hoekgrepen draaien (linksboven) en schalen (rechtsonder) met één vinger. Twee vingers blijven ook werken.
 - Bij vormen wisselt het emmertje in de objectbalk tussen een gevulde vorm en een buitenlijn.
 - Stempels kunnen herhaald worden afgedrukt. Er zijn eenvoudige geometrische vormstempels; geïmporteerde themastickers zijn ook als stempel beschikbaar.
 - Boven het blad staan spiegeltekenen, zes achtergronden en opnieuw afspelen. Afspelen toont alleen tekengegevens, nooit de foto.
-- Gewone tekeningen worden 900 ms na een wijziging automatisch lokaal bewaard. De laatste 40 bewerkingen kunnen ongedaan worden gemaakt tijdens de tekenbeurt. Deze tijdelijke geschiedenis wordt niet opgeslagen.
+- Tekengegevens worden 900 ms na een wijziging automatisch lokaal bewaard. De laatste 40 bewerkingen kunnen ongedaan worden gemaakt tijdens de tekenbeurt. Deze tijdelijke geschiedenis wordt niet opgeslagen.
 
 ## Leerkrachtomgeving
 
@@ -46,7 +46,7 @@ Open **leerkracht** op het startscherm. Bij het eerste gebruik stel je een code 
 
 Er zijn acht thema's: herfst in het heksenbos, sinterklaas, kerst, piraten, restaurant, sprookjes, kriebelbeestjes en winter. Combineer thema's door meerdere vakjes aan te zetten. Importeer PNG- of WebP-stickers en kies per sticker of kinderen die mogen gebruiken. Je kunt stickers bekijken, hernoemen en verwijderen. Een verwijderde bibliotheeksticker blijft behouden in tekeningen waarin deze al geplaatst is.
 
-Alle gereedschappen blijven voor alle kinderen beschikbaar. Onder instellingen kies je liggend A4 of een vierkant tekenblad, een zacht afrondingsgeluid en een optionele themaopdracht. Instellingen blijven lokaal. Projectbeheer toont ook versleutelde fotoprojecten, die nooit in de kindergalerij staan. Ontgrendel, hervat of verwijder ze hier. Voor afronden open je het project en kies je **klaar!**. Gewone tekeningen kunnen samen als ZIP met PNG's worden geëxporteerd.
+Alle gereedschappen blijven voor alle kinderen beschikbaar. Onder instellingen kies je liggend A4 of een vierkant tekenblad. Instellingen blijven lokaal. Projectbeheer toont ook versleutelde fotoprojecten, die nooit in de kindergalerij staan. Ontgrendel, hervat of verwijder ze hier. Het huisje bewaart de tekening en verlaat de tekenbeurt. Gewone tekeningen kunnen samen als ZIP met PNG's worden geëxporteerd.
 
 ## Foto's en privacy
 
@@ -54,15 +54,15 @@ De camera wordt pas aangevraagd na een tik op **open camera**. Voor- en achterca
 
 Foto's worden lokaal opnieuw gecodeerd en zo nodig verkleind tot maximaal 1800 pixels aan de langste zijde. Dit verwijdert bestandsmetadata en beperkt geheugengebruik. Er is geen upload. De foto blijft normaal alleen in geheugen. Het oog verbergt de foto zonder te verwijderen. Met de transparantieregelaar wordt de foto lichter.
 
-Wil je later verdergaan? Gebruik het slotje bovenaan en geef de leerkrachtcode. Kies vervolgens een sterke projectwachtzin van minimaal zestien tekens, bij voorkeur meerdere willekeurige woorden. Het volledige project inclusief foto wordt versleuteld met AES-GCM-256. PBKDF2-SHA-256 gebruikt 600.000 iteraties en een nieuwe willekeurige salt van 16 bytes en IV van 12 bytes per opslag. De wachtzin en ontgrendelingssleutel worden niet persistent bewaard. Verlies van de wachtzin betekent verlies van de bewaarde foto.
+Nieuwe foto’s blijven uitsluitend tijdelijk in geheugen, zonder wachtzin. Autosave bewaart alleen tekengegevens en een fotovrije thumbnail. Via het huisje wordt de laatste tekening eerst betrouwbaar bewaard en daarna de foto uit de actieve tekenbeurt verwijderd. Een opslagfout laat de tekenbeurt open voor een nieuwe poging. Export en thumbnails bouwen altijd vanuit de niet-fotolagen; er is geen fotoargument in de export-API.
 
-Bij **klaar!** en bevestigen wordt het IndexedDB-record in één afgeronde transactie vervangen door uitsluitend tekengegevens en een fotovrije thumbnail. Pas daarna worden de foto-onderlaag en undo/redo-geheugen verwijderd en volgt de succesmelding. Een opslagfout laat het oorspronkelijke project intact voor een nieuwe poging. Export en thumbnails bouwen altijd vanuit de niet-fotolagen; er is geen fotoargument in de export-API.
+Eerder versleutelde projecten blijven uitsluitend via het leerkrachtmenu met hun bestaande wachtzin te openen. Er kunnen geen nieuwe versleutelde fotoprojecten meer worden gemaakt vanuit de interface. Bij teruggaan naar huis wordt ook zo’n geopend oud project vervangen door een fotovrije gewone tekening.
 
 Een browser kan geen forensische verwijdering bewijzen: apparaatback-ups, geheugenbeheer en fysieke toegang tot een ontgrendelde iPad blijven aandachtspunten. `beforeunload` waarschuwt waar mogelijk bij niet-bewaard werk, maar iPadOS kan een app beëindigen zonder deze waarschuwing. Maak op school afspraken over toestemming of een andere passende grondslag, wie mag fotograferen, gedeeld apparaatgebruik, bewaartermijnen en tijdig verwijderen. Importeer alleen algemene illustraties in de stickerbibliotheek; gebruik leerlingfoto's uitsluitend via de aparte fotofunctie.
 
 ## Export
 
-Na afronden bewondert het kind het kunstwerk en kiest het museum, een nieuw vel of verder tekenen. Bij leerkracht → projecten → bewaren / delen zijn PNG, JPG en een afdrukbare A4-PDF beschikbaar. Kies een type en daarna downloaden of delen; die tweede tik houdt de native deelhandeling direct gekoppeld aan een gebruikersactie. Rasterexport is 3508 pixels breed; verhouding en achtergrond blijven behouden. De originele foto, selectieomranding en spiegelhulplijn worden nooit geëxporteerd. **delen / bestanden** gebruikt het apparaatdeelmenu als dat bestanden ondersteunt; anders volgt een download. Als een browser delen na de exportberekening weigert, gebruik dan de aparte downloadknoppen. Op de iPad kun je bestanden in Bestanden bewaren; voor Windows kies je zelf een door school toegestane overdrachtsmethode.
+Via het huisje keert het kind terug naar het startscherm; de gedeelde galerij toont alle gewone tekeningen. Bij leerkracht → projecten → bewaren / delen zijn PNG, JPG en een afdrukbare A4-PDF beschikbaar. Kies een type en daarna downloaden of delen; die tweede tik houdt de native deelhandeling direct gekoppeld aan een gebruikersactie. Rasterexport is 3508 pixels breed; verhouding en achtergrond blijven behouden. De originele foto, selectieomranding en spiegelhulplijn worden nooit geëxporteerd. **delen / bestanden** gebruikt het apparaatdeelmenu als dat bestanden ondersteunt; anders volgt een download. Als een browser delen na de exportberekening weigert, gebruik dan de aparte downloadknoppen. Op de iPad kun je bestanden in Bestanden bewaren; voor Windows kies je zelf een door school toegestane overdrachtsmethode.
 
 ## Professionele illustraties toevoegen
 
@@ -85,7 +85,7 @@ Import accepteert alleen PNG/WebP-stickers tot 12 MB. Foto's mogen daarnaast JPG
 
 React/TypeScript/Vite voor interface en builds; Canvas 2D voor tekenmaterialen en compositing. Een eigen gestructureerd objectmodel maakt tekenwerk bewerkbaar en houdt de foto buiten de tekenengine. IndexedDB voor projecten, instellingen en stickers. De vulfunctie gebruikt een begrensde queue en kleurtolerantie. Export wordt op een afzonderlijk canvas op hogere resolutie opgebouwd. Geen CDN-afhankelijkheden tijdens gebruik.
 
-Bestanden zijn verdeeld over model, tekenengine, canvas-interactie, export, bestandeninvoer, encryptie/opslag, camera, leerkrachtomgeving en interface. De optionele themaopdrachten hebben een gereedschapssymbool en tekst; volledige picturale verhaalkaarten en de ontbrekende themacollecties staan nog op de illustratielijst. Flood-fill rekent in een Web Worker. Nieuwe streken worden waar mogelijk toegevoegd aan het bestaande canvas; live tekenen wordt per animatieframe gebundeld. De gedecodeerde afbeeldingcache is begrensd op 32 MiB en 24 entries (één uitzonderlijk grote afbeelding kan de bytegrens overschrijden). Pixeluitlezen, PNG-coderen en export blijven deels op de hoofdthread; prestaties op een fysieke iPad 9 moeten nog worden gemeten. Er is nog geen versleutelde projectback-up/import buiten de browser; export levert afgeplatte kunstwerken. Cameragedrag, delen en OS-opslagbeheer verschillen per iPadOS-versie.
+Bestanden zijn verdeeld over model, tekenengine, canvas-interactie, export, bestandeninvoer, encryptie/opslag, camera, leerkrachtomgeving en interface. De uitgebreide illustratie-inventaris noemt aanvullende themabeelden en drukwerkmasters. Flood-fill rekent in een Web Worker. Nieuwe streken worden waar mogelijk toegevoegd aan het bestaande canvas; live tekenen wordt per animatieframe gebundeld. De gedecodeerde afbeeldingcache is begrensd op 32 MiB en 24 entries (één uitzonderlijk grote afbeelding kan de bytegrens overschrijden). Pixeluitlezen, PNG-coderen en export blijven deels op de hoofdthread; prestaties op een fysieke iPad 9 moeten nog worden gemeten. Er is nog geen versleutelde projectback-up/import buiten de browser; export levert afgeplatte kunstwerken. Cameragedrag, delen en OS-opslagbeheer verschillen per iPadOS-versie.
 
 ## Tests en fysieke iPad-controle
 
@@ -97,8 +97,8 @@ Controleer vóór inzet in de klas op een fysieke iPad 9:
 2. Snelle vingerlijnen met elk materiaal en vijf diktes, gum, spiegel, gesloten vlakken vullen, 500+ streken.
 3. Stickers plaatsen, slepen, met twee vingers schalen/draaien, +/−, dupliceren, heropenen.
 4. Camera voor/achter, toestemming weigeren, alternatief via Bestanden, opnieuw nemen, schaal/positie en transparantie.
-5. Foto verbergen/tonen, versleuteld bewaren, app volledig sluiten, verkeerde en juiste wachtzin.
-6. Afronden: geen foto in galerij, thumbnail, undo, PNG, JPG, PDF of ZIP. Kijk ook naar een eerder versleuteld opgeslagen project.
+5. Foto verbergen/tonen, draaien naar portretstand, huisje gebruiken en controleren dat alleen de tekening terugkomt.
+6. Na huisje: geen foto in galerij, thumbnail, undo, PNG, JPG, PDF of ZIP. Kijk ook naar een eerder versleuteld opgeslagen project.
 7. Vliegtuigmodus na volledige installatie: openen, tekenen, mengen, stickers, bewaren, heropenen, camera en alle exports.
 8. Export naar Bestanden, deelmenu, A4-afdruk en ZIP openen op Windows.
 9. Opslag vol of ontoegankelijk: foutmelding, nooit een onterechte succesmelding. Controleer ook wat er gebeurt bij geforceerd afsluiten.
@@ -110,3 +110,11 @@ Gebruik geen leerlingfoto's voor ontwikkeling of automatische tests.
 Zie `VERBETERINGEN.md` voor wijzigingen, testbewijs, voorlopige beoordeling en praktijkchecklist. De ontwikkelbranch is `verbeteringen-kleuteratelier`; alleen main publiceert naar GitHub Pages. Nieuwe herkenningsplaatjes zijn optioneel en bevatten geen naam of leerlingnummer. De galerij kan daarop filteren.
 
 Aanvullende browsertests: `scripts/quality-test.mjs`, `scripts/fill-test.mjs`, `scripts/sparkle-test.mjs`, `scripts/offline-test.mjs`. De eerste drie gebruiken de lokale Vite-server op poort 5174; de offlinetest serveert zelfstandig de productiebuild op 5180.
+
+## Directe bediening, foto en verf
+
+Zie `BEDIENING.md` voor de laatste wijzigingen. Ctrl+Z / Cmd+Z maakt ongedaan; Ctrl+Y of Ctrl+Shift+Z / Cmd+Shift+Z doet opnieuw. Tekstvelden behouden hun eigen sneltoetsgedrag.
+
+De kwast gebruikt bij nieuwe lijnen korte vaste druipers en transparante multiply-overlap; dat is een verfeffect, geen natuurkundige RYB-pigmentsimulatie. Het aparte mengvenster gebruikt wel het educatieve RYB-model. Alleen peninvoer met echte drukgegevens varieert de kwastbreedte en potlooddonkerte. Muis en vinger gebruiken de gekozen maat. Opgeslagen oudere lijnen blijven ongewijzigd.
+
+Het stempeloverzicht toont de beschikbare afbeeldingen en drie vormstempels compact zonder scrollen op de gecontroleerde iPad-formaten, ook wanneer alle acht thema’s actief zijn. De aparte stickerknop is verwijderd. Tekstlabels bij de afbeeldingen zijn vervangen door toegankelijke knopnamen. De leerkracht kan alle gewone tekeningen in één keer selecteren voor ZIP-export of verwijderen.

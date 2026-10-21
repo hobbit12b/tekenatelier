@@ -1,5 +1,7 @@
 # Verbeteringsronde tekenatelier
 
+Dit document beschrijft de eerdere ronde. De nieuwste, door de gebruiker gevraagde vereenvoudigingen (zonder plaatjeskeuze, aparte stickers of klaarknop) staan in `BEDIENING.md`.
+
 Ontwikkelbranch: `verbeteringen-kleuteratelier`. Datum: 21 oktober 2026.
 
 ## Resultaat en afbakening

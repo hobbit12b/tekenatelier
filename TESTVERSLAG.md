@@ -41,3 +41,7 @@ Dit historische verslag wordt aangevuld door `VERBETERINGEN.md`, met de actuele 
 ## Aanvulling 21 oktober: acht stickercollecties
 
 96 stickers (12 per thema), alle PNG-uitsneden gedecodeerd en op transparantie gecontroleerd; overzicht visueel beoordeeld. TypeScript, productiebuild, quality-test en offline-test geslaagd. Offlinecontrole laadt alle acht stickervellen en exporteert een heropend werk als PDF. Testoverzicht: scripts/sticker-collections-test.mjs. Testserver was aanvankelijk onbereikbaar vanuit de browser; na herstart buiten de sandbox slaagden de controles. Geen fysieke iPad-test uitgevoerd.
+
+## Bediening, foto en verf
+
+Zie BEDIENING.md voor de nieuwe gebruikerskeuzes en scripts/refinements-test.mjs voor de regressieproef. TypeScript, productiebuild, 29 Vitest-tests, 14 browserchecks, quality-test, offlineproef en fill-test geslaagd. De nieuwe proef controleert hoekgrepen met touch, Ctrl+Z en redo, automatisch mengen, 99 stempelknoppen zonder scroll, tien vormen, alle 32 kleuren, fotoverhoudingen bij draaien, tijdelijke foto, alles selecteren en pendruk. Nieuwe screenshots staan in test-results. Geen fysieke iPad- of Apple Pencil-test uitgevoerd.
