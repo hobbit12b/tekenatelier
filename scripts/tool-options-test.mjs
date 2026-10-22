@@ -40,11 +40,23 @@ try{
  await page.locator('.drawing-card').first().click();assert.equal(await page.getByLabel('titel van je tekening',{exact:true}).inputValue(),'mijn regenboog');await button('naar huis').click();
  await button('nieuwe tekening').click();await page.getByLabel('titel van je tekening',{exact:true}).fill('tweede werk');await button('naar huis').click();
  await button('voor de leerkracht').click();await page.getByLabel('leerkrachtcode',{exact:true}).fill('2468');await button('openen').click();await button('projecten').click();await button('alle tekeningen selecteren').click();
- await button('selectie afdrukken via ricoh').click();await button('afdrukafbeeldingen maken').click();await page.getByRole('button',{name:/^download .*\.jpg$/}).first().waitFor();
- assert.equal(await page.getByRole('button',{name:/^download .*\.jpg$/}).count(),2);
+ await button('selectie afdrukken via ricoh').click();
+ assert.equal(await page.getByRole('button',{name:/^bewaar .* in bestanden$/}).count(),2);
  assert.equal(await page.getByRole('link',{name:'open ricoh',exact:true}).getAttribute('href'),'https://www.eu.smart-integration.ricoh.com/print-site/');
- const download=page.waitForEvent('download');await page.getByRole('button',{name:/^download .*\.jpg$/}).first().click();const file=await download;await file.saveAs('test-results/afdruk-selectie.jpg');
- const {readFile}=await import('node:fs/promises');const jpg=await readFile('test-results/afdruk-selectie.jpg');assert.equal(jpg[0],255);assert.equal(jpg[1],216);
+ const {readFile}=await import('node:fs/promises');
+ for(const format of ['jpg','png','pdf']){
+  await page.getByLabel('bestandstype voor afdrukken',{exact:true}).selectOption(format);
+  const save=page.getByRole('button',{name:'bewaar mijn regenboog in bestanden',exact:true});
+  await page.waitForFunction(()=>!document.querySelector('button[aria-label="bewaar mijn regenboog in bestanden"]').disabled);
+  const downloaded=page.waitForEvent('download');await save.click();const file=await downloaded;
+  assert(file.suggestedFilename().endsWith('.'+format));await file.saveAs(`test-results/afdruk-selectie.${format}`);
+  const bytes=await readFile(`test-results/afdruk-selectie.${format}`);
+  if(format==='jpg'){assert.equal(bytes[0],255);assert.equal(bytes[1],216);}
+  if(format==='png')assert.equal(bytes.subarray(1,4).toString(),'PNG');
+  if(format==='pdf')assert.equal(bytes.subarray(0,4).toString(),'%PDF');
+ }
  await button('sluiten').click();await button('druk mijn regenboog af via ricoh').click();assert(await page.getByText('1 tekening,',{exact:false}).count());
+ assert.equal(await button('bewaar in bestanden').count(),1);
+ assert.equal(await page.getByText('afdruk-pdf maken',{exact:true}).count(),0);
  assert.deepEqual(errors,[]);console.log('PASS both fill modes through worker/UI; eraser choices and undo clear; home left/title right; persistent colour equation and fresh pair each round');
 }finally{await browser.close();}
