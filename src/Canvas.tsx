@@ -4,9 +4,12 @@ import {background,renderArt,renderMarks,stroke,hit,flood} from './render';
 import type {DrawingEdit} from './edits';
 import {transformItem} from './manipulation';
 import {Sparkles} from './GlitterLayer';
+import {createStampSound} from './stampSound';
 type Props={drawing:Drawing;photo:Photo|null;tool:Tool;color:string;size:number;gapRadius:number;mirror:boolean;selected:string|null;stamp:Item|null;onSelect:(id:string|null)=>void;onChange:(edit:DrawingEdit,expected?:Drawing)=>void;onStart:()=>void;onError:(e:unknown)=>void};
 type Move={mode?:'scale'|'rotate';original:Drawing;item:Item;start:Point;distance?:number;angle?:number;changed?:Item;base?:HTMLCanvasElement};
 export function DrawingCanvas(p:Props){
+ const stampSound=useRef<ReturnType<typeof createStampSound>|null>(null);
+ useEffect(()=>{const sound=createStampSound();stampSound.current=sound;return()=>{sound.dispose();stampSound.current=null;};},[]);
  const bg=useRef<HTMLCanvasElement>(null),art=useRef<HTMLCanvasElement>(null),live=useRef<HTMLCanvasElement>(null);
  const state=useRef(p);state.current=p;
  const pointers=useRef(new Map<number,Point>()),draft=useRef<Stroke|null>(null),moving=useRef<Move|null>(null);
@@ -61,7 +64,7 @@ export function DrawingCanvas(p:Props){
    if(fillPending.current)return;fillPending.current=true;setFilling(true);const original=p.drawing;
    void flood(original,pt,p.color,p.gapRadius).then(src=>{if(alive.current)state.current.onChange({...original,marks:[...original.marks,{kind:'fill',id:uid(),src}]},original);}).catch(p.onError).finally(()=>{fillPending.current=false;if(alive.current)setFilling(false);});return;
   }
-  if(p.tool==='stempel'){if(p.stamp){const mark={...p.stamp,id:uid(),x:pt.x,y:pt.y};p.onChange(d=>d.id===p.drawing.id?{...d,marks:[...d.marks,mark]}:d);}return;}
+  if(p.tool==='stempel'){if(p.stamp){const mark={...p.stamp,id:uid(),x:pt.x,y:pt.y};p.onChange(d=>d.id===p.drawing.id?{...d,marks:[...d.marks,mark]}:d);stampSound.current?.play();}return;}
   draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widths[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true}:{})};paint();
  };
  const move=(e:React.PointerEvent)=>{
