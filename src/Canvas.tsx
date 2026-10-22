@@ -4,7 +4,7 @@ import {background,renderArt,renderMarks,stroke,hit,flood} from './render';
 import type {DrawingEdit} from './edits';
 import {transformItem} from './manipulation';
 import {Sparkles} from './GlitterLayer';
-type Props={drawing:Drawing;photo:Photo|null;tool:Tool;color:string;size:number;mirror:boolean;selected:string|null;stamp:Item|null;onSelect:(id:string|null)=>void;onChange:(edit:DrawingEdit,expected?:Drawing)=>void;onStart:()=>void;onError:(e:unknown)=>void};
+type Props={drawing:Drawing;photo:Photo|null;tool:Tool;color:string;size:number;closeGaps:boolean;mirror:boolean;selected:string|null;stamp:Item|null;onSelect:(id:string|null)=>void;onChange:(edit:DrawingEdit,expected?:Drawing)=>void;onStart:()=>void;onError:(e:unknown)=>void};
 type Move={mode?:'scale'|'rotate';original:Drawing;item:Item;start:Point;distance?:number;angle?:number;changed?:Item;base?:HTMLCanvasElement};
 export function DrawingCanvas(p:Props){
  const bg=useRef<HTMLCanvasElement>(null),art=useRef<HTMLCanvasElement>(null),live=useRef<HTMLCanvasElement>(null);
@@ -59,7 +59,7 @@ export function DrawingCanvas(p:Props){
   p.onSelect(null);
   if(p.tool==='vullen'){
    if(fillPending.current)return;fillPending.current=true;setFilling(true);const original=p.drawing;
-   void flood(original,pt,p.color).then(src=>{if(alive.current)state.current.onChange({...original,marks:[...original.marks,{kind:'fill',id:uid(),src}]},original);}).catch(p.onError).finally(()=>{fillPending.current=false;if(alive.current)setFilling(false);});return;
+   void flood(original,pt,p.color,p.closeGaps?5:0).then(src=>{if(alive.current)state.current.onChange({...original,marks:[...original.marks,{kind:'fill',id:uid(),src}]},original);}).catch(p.onError).finally(()=>{fillPending.current=false;if(alive.current)setFilling(false);});return;
   }
   if(p.tool==='stempel'){if(p.stamp){const mark={...p.stamp,id:uid(),x:pt.x,y:pt.y};p.onChange(d=>d.id===p.drawing.id?{...d,marks:[...d.marks,mark]}:d);}return;}
   draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widths[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true}:{})};paint();
