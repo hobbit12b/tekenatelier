@@ -45,3 +45,7 @@ Dit historische verslag wordt aangevuld door `VERBETERINGEN.md`, met de actuele 
 ## Bediening, foto en verf
 
 Zie BEDIENING.md voor de nieuwe gebruikerskeuzes en scripts/refinements-test.mjs voor de regressieproef. TypeScript, productiebuild, 29 Vitest-tests, 14 browserchecks, quality-test, offlineproef en fill-test geslaagd. De nieuwe proef controleert hoekgrepen met touch, Ctrl+Z en redo, automatisch mengen, 99 stempelknoppen zonder scroll, tien vormen, alle 32 kleuren, fotoverhoudingen bij draaien, tijdelijke foto, alles selecteren en pendruk. Nieuwe screenshots staan in test-results. Geen fysieke iPad- of Apple Pencil-test uitgevoerd.
+
+### 22 oktober: gum en kwast
+
+Geslaagd: 29 unit-tests, TypeScript, productiebuild, eraser-move-test (stempel/vorm, verplaatsen/schalen/draaien, voorvertoning versus definitieve pixels, undo/redo), refinements-test en productie-offlineproef. Druiperpixel heeft alfa 0; overlapmenging blijft zichtbaar.

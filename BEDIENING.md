@@ -23,7 +23,7 @@ Ctrl+Z / Cmd+Z maakt ongedaan. Ctrl+Y en Ctrl+Shift+Z / Cmd+Shift+Z doen opnieuw
 
 Het mengvenster start met twee vraagtekens. Elke gekozen kleur vervangt zijn eigen vraagteken. Zodra beide kleuren gekozen zijn, wacht de app 500 ms. Daarna bewegen de kleuren naar elkaar, verschijnt een ronddraaiend kleurvlak en volgt het gemengde resultaat. De animatie duurt 1200 ms; daarna kan met de kleur getekend worden. Een nieuwe keuze annuleert de oude timer. De aparte knop mengen is verwijderd. Verminderde beweging wordt gerespecteerd.
 
-Nieuwe kwastlijnen bevatten korte deterministische druipers en gebruiken transparante multiply-overlap. Dit is een artistiek waterverfeffect, geen natuurkundige pigmentmenging. Het aparte mengvenster blijft het educatieve RYB-model gebruiken. Oude opgeslagen kwastlijnen veranderen niet: alleen nieuwe lijnen hebben het optionele `wet`-kenmerk.
+Nieuwe kwastlijnen bevatten geen druipers en gebruiken transparante multiply-overlap. Dit is een artistiek waterverfeffect, geen natuurkundige pigmentmenging. Het aparte mengvenster blijft het educatieve RYB-model gebruiken. Oude opgeslagen kwastlijnen veranderen niet: alleen nieuwe lijnen hebben het optionele `wet`-kenmerk.
 
 Bij peninvoer wordt de gemeten druk per punt bewaard. De kwast varieert de breedte; het potlood varieert de dekking. Muis en vinger gebruiken de gekozen lijndikte en vaste dekking. Er wordt geen druk uit snelheid verzonnen. Een echte drukgevoelige pen en ondersteunende browser zijn nodig. Drukgegevens en effecten blijven bij heropenen en export behouden.
 
@@ -40,10 +40,16 @@ Camera-, schaal- en verschuifbediening gebruiken pictogrammen met toegankelijke 
 - 14 browserregressiecontroles geslaagd voor materialen, objecten, autosave, heropenen, mengen, leerkracht, import, alle exportformaten en tijdelijke foto’s.
 - De quality-test slaagt met 96 bibliotheekafbeeldingen, snel stempelen, klein schalen en slepen, vertraagde fill-race, tabletknoppen, 500 streken, cachelimiet en blijvende bibliotheekverwijdering.
 - `scripts/refinements-test.mjs`: echte browser-pointerevents voor éénvingerhoekgrepen; Ctrl+Z en beide redo-combinaties; mengfases; 99 stempelknoppen en tien vormen zonder scroll; alle 32 kleuren; fotoverhouding in voorvertoning en tekenblad; tijdelijke foto; alles selecteren. Getest op 1080×810, 1024×768, 810×1080 en 768×1024.
-- Gesimuleerde pendruk bereikt het opgeslagen puntmodel. Pixelcontroles laten bij hogere druk een bredere kwast en donkerder potlood zien; druipers en overlap leveren zichtbare pixels. Dit is geen vervanging voor een echte Apple Pencil-test.
+- Gesimuleerde pendruk bereikt het opgeslagen puntmodel. Pixelcontroles laten bij hogere druk een bredere kwast en donkerder potlood zien; overlap mengt zichtbaar en onder de lijn verschijnen geen druipers. Dit is geen vervanging voor een echte Apple Pencil-test.
 
 Resterende praktijkcontrole: fysieke iPad 9/Safari, camera draaien tijdens opname, Apple Pencil met verschillende druk en zelfstandig gebruik door kleuters. Er zijn uitsluitend fictieve afbeeldingen gebruikt.
 
 Aanvullend geslaagd: productie-offlineproef met alle acht stickervellen, bewaren, heropenen en PDF-export; echte vulproef met een kleine opening zonder lek of wit randje.
 
 Ook glitteranimatie, undo van glitter en verminderde beweging zijn opnieuw gecontroleerd en geslaagd.
+
+## Correctie 22 oktober 2026
+
+De kwast heeft geen druipers meer. Transparante kleurmenging bij overlap blijft bestaan. Tijdens verplaatsen, schalen en draaien worden de geselecteerde vorm en alle latere tekenacties in hun oorspronkelijke volgorde weergegeven. Gumstreken en latere verflijnen verdwijnen dus niet meer tijdens het slepen. De gum blijft een bewerking op de plek op het papier waar is gegumd. Een verouderde asynchrone stempelrender kan geen nieuwere beweging overschrijven.
+
+`eraser-move-test.mjs` vergelijkt de volledige voorvertoning pixel voor pixel met het resultaat na loslaten, voor een vorm en een stempel, bij verplaatsen, schalen, draaien en undo/redo. Geslaagd in Edge. De verfpixeltest bevestigt dat de verwijderde druiper transparant blijft en overlappende kleuren nog mengen.

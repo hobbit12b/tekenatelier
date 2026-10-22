@@ -115,6 +115,6 @@ Aanvullende browsertests: `scripts/quality-test.mjs`, `scripts/fill-test.mjs`, `
 
 Zie `BEDIENING.md` voor de laatste wijzigingen. Ctrl+Z / Cmd+Z maakt ongedaan; Ctrl+Y of Ctrl+Shift+Z / Cmd+Shift+Z doet opnieuw. Tekstvelden behouden hun eigen sneltoetsgedrag.
 
-De kwast gebruikt bij nieuwe lijnen korte vaste druipers en transparante multiply-overlap; dat is een verfeffect, geen natuurkundige RYB-pigmentsimulatie. Het aparte mengvenster gebruikt wel het educatieve RYB-model. Alleen peninvoer met echte drukgegevens varieert de kwastbreedte en potlooddonkerte. Muis en vinger gebruiken de gekozen maat. Opgeslagen oudere lijnen blijven ongewijzigd.
+De kwast gebruikt bij nieuwe lijnen transparante multiply-overlap zonder druipers; dat is een verfeffect, geen natuurkundige RYB-pigmentsimulatie. Het aparte mengvenster gebruikt wel het educatieve RYB-model. Alleen peninvoer met echte drukgegevens varieert de kwastbreedte en potlooddonkerte. Muis en vinger gebruiken de gekozen maat. Opgeslagen oudere lijnen blijven ongewijzigd.
 
 Het stempeloverzicht toont de beschikbare afbeeldingen en drie vormstempels compact zonder scrollen op de gecontroleerde iPad-formaten, ook wanneer alle acht thema’s actief zijn. De aparte stickerknop is verwijderd. Tekstlabels bij de afbeeldingen zijn vervangen door toegankelijke knopnamen. De leerkracht kan alle gewone tekeningen in één keer selecteren voor ZIP-export of verwijderen.

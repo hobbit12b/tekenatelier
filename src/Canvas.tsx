@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {type Drawing,type Photo,type Tool,type Item,type Point,type Stroke,uid,widths} from './model';
-import {background,renderArt,renderMarks,stroke,item,hit,flood} from './render';
+import {background,renderArt,renderMarks,stroke,hit,flood} from './render';
 import type {DrawingEdit} from './edits';
 import {transformItem} from './manipulation';
 import {Sparkles} from './GlitterLayer';
@@ -10,7 +10,7 @@ export function DrawingCanvas(p:Props){
  const bg=useRef<HTMLCanvasElement>(null),art=useRef<HTMLCanvasElement>(null),live=useRef<HTMLCanvasElement>(null);
  const state=useRef(p);state.current=p;
  const pointers=useRef(new Map<number,Point>()),draft=useRef<Stroke|null>(null),moving=useRef<Move|null>(null);
- const serial=useRef(0),frame=useRef(0),committed=useRef<Drawing|null>(null),alive=useRef(true),fillPending=useRef(false);
+ const previewSerial=useRef(0),serial=useRef(0),frame=useRef(0),committed=useRef<Drawing|null>(null),alive=useRef(true),fillPending=useRef(false);
  const [filling,setFilling]=useState(false),[movingPreview,setMovingPreview]=useState<Item|null>(null);
  useEffect(()=>()=>{alive.current=false;serial.current++;cancelAnimationFrame(frame.current);},[]);
  useEffect(()=>{const c=bg.current!;c.width=p.drawing.width;c.height=p.drawing.height;background(c.getContext('2d')!,p.drawing);},[p.drawing.width,p.drawing.height,p.drawing.background]);
@@ -28,11 +28,22 @@ export function DrawingCanvas(p:Props){
  const point=(e:{clientX:number;clientY:number;pointerType?:string;pressure?:number})=>{const r=live.current!.getBoundingClientRect(),d=state.current.drawing;return {x:(e.clientX-r.left)/r.width*d.width,y:(e.clientY-r.top)/r.height*d.height,...(e.pointerType==='pen'&&e.pressure!==undefined?{pressure:Math.max(.05,Math.min(1,e.pressure))}:{})};};
  const paint=()=>{cancelAnimationFrame(frame.current);frame.current=requestAnimationFrame(()=>{
   const c=live.current;if(!c)return;const ctx=c.getContext('2d')!,s=draft.current,m=moving.current;
-  ctx.clearRect(0,0,c.width,c.height);
+  if(!m?.changed)ctx.clearRect(0,0,c.width,c.height);
   if(s){if(s.tool==='gum'||s.wet){ctx.drawImage(art.current!,0,0);art.current!.style.visibility='hidden';}stroke(ctx,s,c.width);}
-  else if(m?.base&&m.changed){setMovingPreview(m.changed);ctx.drawImage(m.base,0,0);void item(ctx,m.changed).catch(state.current.onError);art.current!.style.visibility='hidden';}
+  else if(m?.base&&m.changed){
+   const changed=m.changed,n=++previewSerial.current;setMovingPreview(changed);
+   // Replay the selected item and everything above it, including erasers.
+   // Render offscreen so an older asynchronous image cannot overwrite a newer drag.
+   const preview=document.createElement('canvas');preview.width=c.width;preview.height=c.height;
+   const target=preview.getContext('2d')!;target.drawImage(m.base,0,0);
+   const index=m.original.marks.findIndex(o=>o.id===m.item.id);
+   void renderMarks(target,{...m.original,marks:[changed,...m.original.marks.slice(index+1)]}).then(()=>{
+    if(n!==previewSerial.current||moving.current!==m||!live.current)return;
+    ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(preview,0,0);art.current!.style.visibility='hidden';
+   }).catch(state.current.onError);
+  }
  });};
- const reset=()=>{setMovingPreview(null);cancelAnimationFrame(frame.current);pointers.current.clear();draft.current=null;moving.current=null;if(art.current)art.current.style.visibility='visible';live.current?.getContext('2d')!.clearRect(0,0,state.current.drawing.width,state.current.drawing.height);};
+ const reset=()=>{previewSerial.current++;setMovingPreview(null);cancelAnimationFrame(frame.current);pointers.current.clear();draft.current=null;moving.current=null;if(art.current)art.current.style.visibility='visible';live.current?.getContext('2d')!.clearRect(0,0,state.current.drawing.width,state.current.drawing.height);};
  useEffect(()=>{reset();fillPending.current=false;setFilling(false);},[p.drawing.id]);
  const down=(e:React.PointerEvent<HTMLCanvasElement>)=>{
   e.preventDefault();if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -42,7 +53,7 @@ export function DrawingCanvas(p:Props){
   if(p.tool==='selectie'){
    const found=[...p.drawing.marks].reverse().find(m=>['shape','text','sticker'].includes(m.kind)&&hit(m as Item,pt)) as Item|undefined;
    p.onSelect(found?.id||null);
-   if(found){const m:Move={original:p.drawing,item:{...found},start:pt};moving.current=m;void renderArt(document.createElement('canvas'),{...p.drawing,marks:p.drawing.marks.filter(i=>i.id!==found.id)}).then(c=>{if(moving.current===m){m.base=c;paint();}}).catch(p.onError);}
+   if(found){const m:Move={original:p.drawing,item:{...found},start:pt};moving.current=m;void renderArt(document.createElement('canvas'),{...p.drawing,marks:p.drawing.marks.slice(0,p.drawing.marks.findIndex(i=>i.id===found.id))}).then(c=>{if(moving.current===m){m.base=c;paint();}}).catch(p.onError);}
    return;
   }
   p.onSelect(null);
@@ -63,7 +74,7 @@ export function DrawingCanvas(p:Props){
   if(draft.current){const events=[...(e.nativeEvent.getCoalescedEvents?.()||[]),e.nativeEvent];for(const ev of events){const next=point(ev),last=draft.current.points.at(-1)!;if(Math.hypot(next.x-last.x,next.y-last.y)>.5)draft.current.points.push(next);}paint();}
  };
  const up=(e:React.PointerEvent)=>{
-  pointers.current.delete(e.pointerId);if(pointers.current.size)return;
+  pointers.current.delete(e.pointerId);if(pointers.current.size)return;previewSerial.current++;
   const p=state.current,mark=draft.current,m=moving.current;cancelAnimationFrame(frame.current);
   if(mark)p.onChange(d=>({...d,marks:[...d.marks,mark]}));
   if(m?.changed)p.onChange({...m.original,marks:m.original.marks.map(o=>o.id===m.item.id?m.changed!:o)},m.original);
@@ -76,7 +87,7 @@ export function DrawingCanvas(p:Props){
   e.preventDefault();e.stopPropagation();if(!selected||e.button!==0)return;
   e.currentTarget.setPointerCapture(e.pointerId);pointers.current.clear();const pt=point(e);pointers.current.set(e.pointerId,pt);state.current.onStart();
   const m:Move={original:state.current.drawing,item:{...selected},start:pt,mode};moving.current=m;
-  void renderArt(document.createElement('canvas'),{...m.original,marks:m.original.marks.filter(i=>i.id!==selected.id)}).then(c=>{if(moving.current===m){m.base=c;paint();}}).catch(state.current.onError);
+  void renderArt(document.createElement('canvas'),{...m.original,marks:m.original.marks.slice(0,m.original.marks.findIndex(i=>i.id===selected.id))}).then(c=>{if(moving.current===m){m.base=c;paint();}}).catch(state.current.onError);
  };
  return <div className="paper" style={{'--paper-ratio':p.drawing.width/p.drawing.height,aspectRatio:`${p.drawing.width}/${p.drawing.height}`} as React.CSSProperties}>
   <canvas ref={bg}/>{p.photo&&<div className="photo-layer" style={{opacity:p.photo.visible?p.photo.opacity:0}}><img draggable={false} src={p.photo.src} style={{left:`${p.photo.x/p.drawing.width*100}%`,top:`${p.photo.y/p.drawing.height*100}%`,width:`${p.photo.w/p.drawing.width*100}%`,height:`${p.photo.h/p.drawing.height*100}%`}}/></div>}
