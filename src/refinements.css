@@ -58,19 +58,16 @@
 .toolbox:has(.tool-popout){position:relative;z-index:20;overflow:visible}
 
 .choice-demo .demo-fill{animation:demo-fill 3.6s infinite;transform-origin:34px 55px}
-.choice-demo .demo-spill{animation:demo-spill 3.6s infinite}
-.choice-demo .demo-bridge{animation:demo-bridge 3.6s infinite}
 .choice-erase .demo-small-wipe{animation:demo-wipe 3.6s infinite}
 .choice-erase .demo-eraser{animation:demo-rub 3.6s infinite}
 .choice-clear .demo-drawing{animation:demo-clear 3.6s infinite}
-.choice-clear .demo-eraser{animation:demo-sweep 3.6s infinite}
 .choice-clear .demo-clean{animation:demo-clean 3.6s infinite}
 @keyframes demo-fill{0%,18%{transform:scaleY(0)}50%,90%{transform:scaleY(1)}100%{transform:scaleY(0)}}
-@keyframes demo-spill{0%,40%,100%{clip-path:inset(0 100% 0 0);opacity:0}65%,90%{clip-path:inset(0);opacity:1}}
-@keyframes demo-bridge{0%,12%,100%{opacity:.25}22%,90%{opacity:1}}
 @keyframes demo-wipe{0%,20%,100%{opacity:0}45%,90%{opacity:1}}
 @keyframes demo-rub{0%,15%,100%{transform:translate(0,0)}30%{transform:translate(-5px,7px)}45%{transform:translate(5px,0)}60%,90%{transform:translate(13px,-15px)}}
 @keyframes demo-clear{0%,15%,100%{clip-path:inset(0)}60%,90%{clip-path:inset(0 0 100% 0)}}
-@keyframes demo-sweep{0%,15%,100%{transform:translate(0,21px);opacity:1}60%{transform:translate(0,-25px);opacity:1}70%,90%{transform:translate(0,-25px);opacity:0}}
 @keyframes demo-clean{0%,60%,100%{opacity:0}70%,90%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.choice-demo *{animation:none!important}.choice-clear .demo-drawing,.choice-clear .demo-eraser{opacity:0}.choice-erase .demo-eraser{transform:translate(13px,-15px)}}
+.choice-clear .demo-magic{animation:demo-magic 3.6s infinite}
+@keyframes demo-magic{0%,12%,100%{transform:translateY(29px);opacity:0}18%{transform:translateY(29px);opacity:1}58%{transform:translateY(-17px);opacity:1}65%,90%{transform:translateY(-17px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.choice-clear .demo-magic{opacity:0}}
