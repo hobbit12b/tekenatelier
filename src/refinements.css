@@ -54,6 +54,7 @@
 .tool-popout{position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);display:flex;gap:6px;padding:6px;background:#fffaf0;border:2px solid #e8d9bd;border-radius:18px;box-shadow:0 4px 14px #705b4230;z-index:20}
 .tool-popout:before{content:'';position:absolute;left:-8px;top:calc(50% - 6px);width:12px;height:12px;transform:rotate(45deg);background:#fffaf0;border-left:2px solid #e8d9bd;border-bottom:2px solid #e8d9bd}
 .toolbox .tool-popout .btn{width:80px;min-width:80px;height:76px;min-height:76px;padding:3px;transform:none}
+.toolbox .tool-popout .btn:disabled{opacity:1}
 .toolbox .tool-popout .btn svg{width:72px;height:66px}
 .toolbox:has(.tool-popout){position:relative;z-index:20;overflow:visible}
 
@@ -81,5 +82,5 @@
 @media(max-width:650px){.drawing-title{font-size:14px;padding:7px 4px}.drawing-app .brand{font-size:16px}.drawing-app .topbar{gap:4px}.toolbox .tool-popout .btn{width:64px;min-width:64px}.toolbox .tool-popout .btn svg{width:58px}}
 
 .choice-clear .demo-paper{fill:#fff;animation:demo-white-paper 5s infinite}
-@keyframes demo-white-paper{0%,12%,100%{fill:#b8cbdc}60%,92%{fill:#fff}}
+@keyframes demo-white-paper{0%,12%,100%{fill:#fffdf5}60%,92%{fill:#fff}}
 @media(prefers-reduced-motion:reduce){.choice-erase .demo-door,.choice-clear .demo-clean{opacity:0}.choice-clear .demo-paper{fill:#fff}}
