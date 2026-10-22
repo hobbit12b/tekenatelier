@@ -14,12 +14,12 @@ try{
  const canvas=page.getByLabel('tekenblad',{exact:true});
  const pixel=()=>page.locator('.art-layer').evaluate(c=>[...c.getContext('2d').getImageData(30,30,1,1).data]);
  for(const mode of ['openingen sluiten','openingen volgen']){
-  await button('vullen').click();assert.equal(await page.locator('.side-panel').count(),0);assert.equal(await page.locator('.tool-popout').innerText(),'');await page.screenshot({path:'test-results/vul-subknoppen.png'});await button(mode).click();const r=await canvas.boundingBox();await page.mouse.click(r.x+r.width/2,r.y+r.height*400/848);await page.waitForTimeout(600);
+  await button('vullen').click();assert.equal(await page.locator('.side-panel').count(),0);assert.equal(await page.locator('.tool-popout').innerText(),'');await page.waitForTimeout(2400);await page.screenshot({path:'test-results/vul-subknoppen.png'});await button(mode).click();const r=await canvas.boundingBox();await page.mouse.click(r.x+r.width/2,r.y+r.height*400/848);await page.waitForTimeout(600);
   assert.equal((await pixel())[3],mode==='openingen sluiten'?0:255,mode);
   await button('ongedaan maken').click();await page.waitForTimeout(150);
  }
  const before=await page.locator('.art-layer').evaluate(c=>c.toDataURL());
- await button('gum').click();assert.equal(await page.locator('.tool-popout').innerText(),'');await page.screenshot({path:'test-results/gum-subknoppen.png'});await button('zelf gummen').click();assert.equal(await page.locator('.side-panel').count(),0);
+ await button('gum').click();assert.equal(await page.locator('.tool-popout').innerText(),'');await page.waitForTimeout(2400);await page.screenshot({path:'test-results/gum-subknoppen.png'});await button('zelf gummen').click();assert.equal(await page.locator('.side-panel').count(),0);
  await button('gum').click();await button('hele vel leegmaken').click();await page.waitForTimeout(200);
  assert(await page.locator('.art-layer').evaluate(c=>!c.getContext('2d').getImageData(0,0,c.width,c.height).data.some(v=>v)));
  await page.keyboard.press('Control+z');await page.waitForTimeout(200);assert.equal(await page.locator('.art-layer').evaluate(c=>c.toDataURL()),before);
