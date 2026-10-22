@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import type {Drawing} from './model';
+import type {Drawing,Sticker,ShapeName} from './model';
 import {colors} from './model';
 import {renderArt,shapePath} from './render';
 import {mix} from './mixing';
@@ -13,9 +13,17 @@ export function Badge({name}:{name:string}){
 export function BadgePicker({value,onChange,all=false}:{value:string;onChange:(v:string)=>void;all?:boolean}){return <div className="badge-picker" aria-label={all?'zoek jouw plaatje':'kies jouw plaatje'}>{all&&<button aria-label="alle tekeningen" aria-pressed={!value} onClick={()=>onChange('')}><Icon name="folder"/></button>}{badges.map(b=><button key={b} aria-label={`${all?'tekeningen van':'mijn plaatje'} ${b}`} aria-pressed={value===b} onClick={()=>onChange(b)}><Badge name={b}/></button>)}</div>;}
 export function Artwork({drawing}:{drawing:Drawing}){const canvas=useRef<HTMLCanvasElement>(null);useEffect(()=>{let stopped=false;void renderArt(document.createElement('canvas'),drawing,.65,true).then(c=>{if(!stopped&&canvas.current){canvas.current.width=c.width;canvas.current.height=c.height;canvas.current.getContext('2d')!.drawImage(c,0,0);}});return()=>{stopped=true;};},[drawing]);return <canvas ref={canvas} className="artwork-preview" aria-label="jouw kunstwerk"/>;}
 export function ColorMixer({custom,onUse,close}:{custom:string[];onUse:(c:string)=>void;close:()=>void}){
- const [a,setA]=useState(colors[2]),[b,setB]=useState(colors[6]),[round,setRound]=useState(0),[ready,setReady]=useState(false);
- useEffect(()=>{setReady(false);const t=setTimeout(()=>setReady(true),850);return()=>clearTimeout(t);},[a,b,round]);
- return <Modal title="een beetje kleurmagie" close={close}><p>kies twee kleuren. wat zou er gebeuren?</p><div className="mix-stage" key={a+b+round} aria-label="twee kleuren worden één"><i className="paint-left" style={{background:a}}/><i className="paint-right" style={{background:b}}/><i className="paint-result" style={{background:mix(a,b)}}/><Icon name="mix" size={70}/></div><div className="mix-palettes">{[true,false].map(first=><div className="palette" key={String(first)}>{[...colors,...custom].map((c,i)=><button key={i} aria-label={`${first?'eerste':'tweede'} mengkleur ${c}`} aria-pressed={(first?a:b)===c} className={`color ${(first?a:b)===c?'chosen':''}`} onClick={()=>first?setA(c):setB(c)}><i style={{background:c}}/></button>)}</div>)}</div><div className="row mix-actions"><Button icon="mix" label="nog eens mengen" onClick={()=>setRound(r=>r+1)}>mengen</Button><Button icon="kwast" label="met mengkleur tekenen" className="primary" disabled={!ready} onClick={()=>onUse(mix(a,b))}>tekenen</Button></div></Modal>;
+ const [a,setA]=useState<string|null>(null),[b,setB]=useState<string|null>(null),[phase,setPhase]=useState<'waiting'|'mixing'|'ready'>('waiting');
+ useEffect(()=>{setPhase('waiting');if(!a||!b)return;const start=setTimeout(()=>setPhase('mixing'),500),end=setTimeout(()=>setPhase('ready'),1700);return()=>{clearTimeout(start);clearTimeout(end);};},[a,b]);
+ const result=a&&b?mix(a,b):null;
+ const choose=(first:boolean,color:string)=>{if((first?a:b)===color)return;setPhase('waiting');first?setA(color):setB(color);};
+ return <Modal title="kleuren mengen" close={close}><div className={`mix-stage mix-${phase}`} aria-label={phase==='waiting'?'kies twee kleuren':phase==='mixing'?'kleuren worden gemengd':'mengkleur klaar'}><i className="paint-left" style={{background:a||'#f5eddf'}}>{!a&&'?'}</i><i className="paint-right" style={{background:b||'#f5eddf'}}>{!b&&'?'}</i>{result&&<i className="paint-result" style={{background:phase==='mixing'?`conic-gradient(${a},${b},${result},${a},${b},${result},${a})`:result}}/>}</div><div className="mix-palettes">{[true,false].map(first=><div className="palette" key={String(first)}>{[...colors,...custom].map((c,i)=><button key={i} aria-label={`${first?'eerste':'tweede'} mengkleur ${c}`} aria-pressed={(first?a:b)===c} className={`color ${(first?a:b)===c?'chosen':''}`} onClick={()=>choose(first,c)}><i style={{background:c}}/></button>)}</div>)}</div><div className="row mix-actions"><Button icon="kwast" label="met mengkleur tekenen" className="primary" disabled={phase!=='ready'} onClick={()=>result&&onUse(result)}>tekenen</Button></div></Modal>;
+}
+export function StampLibrary({stickers,color,onSticker,onShape}:{stickers:Sticker[];color:string;onSticker:(s:Sticker)=>void;onShape:(s:ShapeName)=>void}){
+ const ref=useRef<HTMLDivElement>(null),[columns,setColumns]=useState(4);
+ const count=stickers.length+3;
+ useEffect(()=>{const el=ref.current!;const observer=new ResizeObserver(([entry])=>{const {width,height}=entry.contentRect;setColumns(Math.max(3,Math.ceil(Math.sqrt(count*width/Math.max(1,height)))));});observer.observe(el);return()=>observer.disconnect();},[count]);
+ return <div ref={ref} className="stamp-library sticker-grid" style={{gridTemplateColumns:`repeat(${columns},minmax(0,1fr))`,gridTemplateRows:`repeat(${Math.ceil(count/columns)},minmax(0,1fr))`}}>{stickers.map(s=><button key={s.id} aria-label={s.name} title={s.name} onClick={()=>onSticker(s)}><img src={s.src} alt={s.name}/></button>)}{(['ster','hart','cirkel'] as const).map(shape=><button key={shape} aria-label={`stempel ${shape}`} onClick={()=>onShape(shape)}><ShapePreview shape={shape} color={color}/></button>)}</div>;
 }
 export function TeacherExport({drawing,close,error}:{drawing:Drawing;close:()=>void;error:(e:unknown)=>void}){
  const [prepared,setPrepared]=useState<{blob:Blob;name:string}|null>(null),[busy,setBusy]=useState(false);

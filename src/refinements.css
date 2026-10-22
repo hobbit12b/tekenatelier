@@ -1,0 +1,54 @@
+/* Keep the logical paper ratio: max-width + fixed height used to stretch photos. */
+.paper{width:min(100cqw,calc(100cqh * var(--paper-ratio)));height:auto;max-width:none;max-height:none;flex:none}
+.photo-prepare{height:auto;max-height:none;margin:0 auto 16px;flex:none}
+.photo-prepare img,.photo-layer img{object-fit:contain}
+.camera-preview video{width:100%;height:auto;object-fit:contain}
+.modal:has(.photo-prepare) label input{flex:1;min-width:0}
+.app:has(.home) .topbar .brand-button{visibility:hidden}
+.home .intro h1{font-style:normal;color:#3f7769}
+.paper-caption .tool-feedback{font-size:12px}
+.selection{z-index:6}
+.selection:before,.selection:after{display:none}
+.selection-handle{position:absolute;pointer-events:auto;touch-action:none;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;background:transparent}
+.selection-handle.rotate{left:-25px;top:-25px;cursor:grab}
+.selection-handle.scale{right:-25px;bottom:-25px;cursor:nwse-resize}
+.selection-handle span{display:grid;place-items:center;width:25px;height:25px;border:2px solid #3e8071;border-radius:50%;background:#fffdf6;color:#3e8071;font-size:19px;font-weight:bold;box-shadow:0 1px 3px #0002}
+.side-panel{display:flex;flex-direction:column;max-height:none;overflow:hidden;top:8px;bottom:8px;padding:12px}
+.side-panel header{flex:none;height:52px}
+.side-panel header h2{margin:0}
+.side-panel>.shape-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.side-panel>.shape-grid button{min-height:60px;padding:4px}
+.stamp-panel{left:100px;right:100px;width:auto}
+.stamp-library{flex:1;min-height:0;gap:5px;overflow:hidden}
+.stamp-library button{padding:3px;min-height:0;min-width:0;border:1px solid #eadfc7;border-radius:12px;overflow:hidden}
+.stamp-library img,.stamp-library .shape-preview{width:100%;height:100%;min-height:0;object-fit:contain}
+.palette-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;min-height:0;padding:8px 12px}
+.palette-bar>.palette{min-width:0;max-height:none;overflow:visible;gap:0}
+.palette-bar .color{width:44px;height:44px;min-width:44px;min-height:44px;padding:4px}
+.palette-bar .color i{width:31px;height:31px}
+.palette-bar .color.chosen:before{width:39px;height:39px}
+.palette-bar .thickness{padding:0;border:0}
+.palette-bar .thickness button{width:44px;min-width:44px;height:48px;min-height:48px}
+.palette-bar .mix-button{min-width:64px;margin:0}
+.mix-stage>i{display:grid;place-items:center;font-style:normal;font-size:58px;color:#a18c65;animation:none}
+.mix-stage .paint-left{left:8%;opacity:1;transform:none}
+.mix-stage .paint-right{right:8%;opacity:1;transform:none}
+.mix-stage .paint-result{opacity:0;transform:none}
+.mix-mixing .paint-left{animation:paint-left .5s ease-in-out forwards}
+.mix-mixing .paint-right{animation:paint-right .5s ease-in-out forwards}
+.mix-mixing .paint-result{opacity:1;animation:mix-swirl 1.2s ease-in-out forwards}
+.mix-ready .paint-left,.mix-ready .paint-right{opacity:0}
+.mix-ready .paint-result{opacity:1}
+.project-selection{flex-wrap:wrap;margin:12px 0}
+.project-row input[aria-label="naam kunstwerk"]{min-width:0;width:160px;flex:1}
+@keyframes mix-swirl{0%{opacity:0;transform:scale(.35) rotate(0deg)}35%{opacity:1}100%{opacity:1;transform:scale(1) rotate(540deg)}}
+@media(orientation:portrait),(max-width:749px){
+ .palette-bar{grid-template-columns:1fr auto;row-gap:5px}
+ .palette-bar>.palette{grid-column:1/-1;grid-row:1;order:0;min-width:0}
+ .palette-bar .thickness{grid-column:1;grid-row:2;order:0;justify-content:center}
+ .palette-bar .mix-button{grid-column:2;grid-row:2;order:0;flex-direction:row;min-height:48px}
+ .stamp-panel{left:80px;right:80px}
+ .paper-caption .tool-feedback{min-width:0;font-size:12px}
+}
+@media(max-width:600px){.stamp-panel{left:8px;right:8px}.palette-bar{padding:4px}.palette-bar .color{width:40px;min-width:40px;height:40px;min-height:40px}.side-panel{max-width:calc(100% - 16px)}.object-controls .btn{min-width:44px;min-height:44px}}
+@media(prefers-reduced-motion:reduce){.mix-mixing .paint-left,.mix-mixing .paint-right{animation:none;opacity:0}.mix-mixing .paint-result{animation:none;opacity:1}}
