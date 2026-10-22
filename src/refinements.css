@@ -58,12 +58,12 @@
 .toolbox:has(.tool-popout){position:relative;z-index:20;overflow:visible}
 
 .choice-demo .demo-fill{animation:demo-fill 3.6s infinite;transform-origin:34px 55px}
-.choice-erase .demo-small-wipe{animation:demo-wipe 3.6s infinite}
+.choice-erase .demo-door{animation:demo-door 3.6s infinite}
 .choice-erase .demo-eraser{animation:demo-rub 3.6s infinite}
 .choice-clear .demo-drawing{animation:demo-clear 5s infinite}
 .choice-clear .demo-clean{animation:demo-magic 5s infinite}
 @keyframes demo-fill{0%,18%{transform:scaleY(0)}50%,90%{transform:scaleY(1)}100%{transform:scaleY(0)}}
-@keyframes demo-wipe{0%,20%,100%{opacity:0}45%,90%{opacity:1}}
+@keyframes demo-door{0%,20%,100%{opacity:1}45%,90%{opacity:0}}
 @keyframes demo-rub{0%,15%,100%{transform:translate(0,0)}30%{transform:translate(-5px,7px)}45%{transform:translate(5px,0)}60%,90%{transform:translate(13px,-15px)}}
 @keyframes demo-clean{0%,60%,100%{opacity:0}70%,90%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.choice-demo *{animation:none!important}.choice-clear .demo-drawing,.choice-clear .demo-eraser{opacity:0}.choice-erase .demo-eraser{transform:translate(13px,-15px)}}
@@ -79,3 +79,7 @@
 .drawing-title{flex:1;min-width:0;max-width:460px;margin:0 auto;padding:10px 12px;border:1px dashed #d9c7a3;border-radius:14px;background:#fff9ed80;font:inherit;color:#526c70;text-align:center;height:46px}
 .drawing-title:focus{outline:2px solid #89bbaa;background:#fffdf5}
 @media(max-width:650px){.drawing-title{font-size:14px;padding:7px 4px}.drawing-app .brand{font-size:16px}.drawing-app .topbar{gap:4px}.toolbox .tool-popout .btn{width:64px;min-width:64px}.toolbox .tool-popout .btn svg{width:58px}}
+
+.choice-clear .demo-paper{fill:#fff;animation:demo-white-paper 5s infinite}
+@keyframes demo-white-paper{0%,12%,100%{fill:#b8cbdc}60%,92%{fill:#fff}}
+@media(prefers-reduced-motion:reduce){.choice-erase .demo-door,.choice-clear .demo-clean{opacity:0}.choice-clear .demo-paper{fill:#fff}}
