@@ -40,10 +40,11 @@ try{
  await page.locator('.drawing-card').first().click();assert.equal(await page.getByLabel('titel van je tekening',{exact:true}).inputValue(),'mijn regenboog');await button('naar huis').click();
  await button('nieuwe tekening').click();await page.getByLabel('titel van je tekening',{exact:true}).fill('tweede werk');await button('naar huis').click();
  await button('voor de leerkracht').click();await page.getByLabel('leerkrachtcode',{exact:true}).fill('2468');await button('openen').click();await button('projecten').click();await button('alle tekeningen selecteren').click();
- await button('selectie afdrukken via ricoh').click();await button('afdruk-pdf maken').click();await button('afdruk-pdf downloaden').waitFor();
+ await button('selectie afdrukken via ricoh').click();await button('afdrukafbeeldingen maken').click();await page.getByRole('button',{name:/^download .*\.jpg$/}).first().waitFor();
+ assert.equal(await page.getByRole('button',{name:/^download .*\.jpg$/}).count(),2);
  assert.equal(await page.getByRole('link',{name:'open ricoh',exact:true}).getAttribute('href'),'https://www.eu.smart-integration.ricoh.com/print-site/');
- const download=page.waitForEvent('download');await button('afdruk-pdf downloaden').click();const file=await download;await file.saveAs('test-results/afdruk-selectie.pdf');
- const {readFile}=await import('node:fs/promises');const pdf=await readFile('test-results/afdruk-selectie.pdf');assert.equal((pdf.toString('latin1').match(/\/Type \/Page\b/g)||[]).length,2);
+ const download=page.waitForEvent('download');await page.getByRole('button',{name:/^download .*\.jpg$/}).first().click();const file=await download;await file.saveAs('test-results/afdruk-selectie.jpg');
+ const {readFile}=await import('node:fs/promises');const jpg=await readFile('test-results/afdruk-selectie.jpg');assert.equal(jpg[0],255);assert.equal(jpg[1],216);
  await button('sluiten').click();await button('druk mijn regenboog af via ricoh').click();assert(await page.getByText('1 tekening,',{exact:false}).count());
  assert.deepEqual(errors,[]);console.log('PASS both fill modes through worker/UI; eraser choices and undo clear; home left/title right; persistent colour equation and fresh pair each round');
 }finally{await browser.close();}
