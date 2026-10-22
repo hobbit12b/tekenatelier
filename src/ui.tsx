@@ -5,18 +5,17 @@ export type IconName=typeof materials[number]|typeof illustrated[number];
 export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'wide'|'erase'|'clear'}){
  const fill=mode==='close'||mode==='flow'||mode==='wide';
  return <svg className={`choice-demo choice-${mode}`} aria-hidden="true" viewBox="0 0 80 72" fill="none" strokeLinecap="round" strokeLinejoin="round">
-  <rect x="4" y="4" width="72" height="64" rx="7" fill={mode==='clear'?'#b8cbdc':'#fffdf5'} stroke="#cbbd9f" strokeWidth="2"/>
+  <rect className="demo-paper" x="4" y="4" width="72" height="64" rx="7" fill={mode==='clear'?'#b8cbdc':'#fffdf5'} stroke="#cbbd9f" strokeWidth="2"/>
   {fill?<>
    <circle className="demo-fill" cx="34" cy="38" r="21" fill="#52b8e8"/>
    {mode!=='flow'?<path d={mode==='wide'?'M41.9 16.4A23 23 0 1 0 55.6 30.1':'M47.2 19.2A23 23 0 1 0 52.8 24.8'} stroke="#394c57" strokeWidth="4"/>:<circle cx="34" cy="38" r="23" stroke="#394c57" strokeWidth="4"/>}
   </>:<>
    <g className="demo-drawing">
     <path d="m14 40 18-16 18 16M19 39v19h26V39" stroke="#e87e5f" strokeWidth="4"/>
-    <path d="M29 57V46h8v11" stroke="#a576b1" strokeWidth="4"/>
+    <path className="demo-door" d="M29 57V46h8v11" stroke="#a576b1" strokeWidth="4"/>
     <circle cx="59" cy="21" r="6" fill="#f2c63f"/>
     <path d="m14 61 48-1" stroke="#81b270" strokeWidth="4"/>
    </g>
-   {mode==='erase'&&<rect className="demo-small-wipe" x="27" y="43" width="12" height="16" fill="#fffdf5"/>}
    {mode==='erase'&&<g className="demo-eraser" stroke="#b26d78" strokeWidth="1.5">
     <path d="m29 38 12-15q2-2 4 0l4 3q2 2 0 4L37 45Z" fill="#ee9ca9"/>
     <path d="m29 38 5-6 8 7-5 6Z" fill="#f7dfad"/>
