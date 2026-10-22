@@ -4,22 +4,27 @@ const illustrated=['vullen','mix','home','shapes','stickers','stempel','text','s
 export type IconName=typeof materials[number]|typeof illustrated[number];
 export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'erase'|'clear'}){
  const fill=mode==='close'||mode==='flow';
- return <svg aria-hidden="true" viewBox="0 0 64 64" fill="none" strokeLinecap="round" strokeLinejoin="round">
-  <path d="M8 6 49 8 56 17 54 57 7 55Z" fill="#fffdf5" stroke="#d4c4a5" strokeWidth="2"/>
+ return <svg className={`choice-demo choice-${mode}`} aria-hidden="true" viewBox="0 0 80 72" fill="none" strokeLinecap="round" strokeLinejoin="round">
+  <rect x="4" y="4" width="72" height="64" rx="7" fill="#fffdf5" stroke="#cbbd9f" strokeWidth="2"/>
   {fill?<>
-   {mode==='flow'&&<path d="M38 19Q58 13 57 30L55 51Q42 58 14 50L12 31Q20 24 38 19" fill="#f6c64a" opacity=".8"/>}
-   <path d="M36 20Q20 13 16 29Q11 47 29 48Q47 51 47 34L44 28Q41 23 36 20" fill="#f4c642"/>
-   <path d="M34 18Q17 12 14 30Q10 49 30 50Q50 52 49 32" stroke="#538d85" strokeWidth="4"/>
-   {mode==='close'?<path d="M38 20 47 27" stroke="#538d85" strokeWidth="4" strokeDasharray="2 5"/>:<path d="m38 25 14-7m-6 0 6 0-2 6" stroke="#be7c26" strokeWidth="3"/>}
-  </>:mode==='erase'?<>
-   <path d="m13 42 9-11 2 16m-10-9 10 1m13 8 7-11 5 12" stroke="#73a4c6" strokeWidth="4"/>
-   <path d="m22 35 12-17q3-4 7-1l9 7q3 3 0 6L38 46Z" fill="#ef9f9f" stroke="#c77f83" strokeWidth="2"/>
-   <path d="m22 35 9-12 16 12-9 11Z" fill="#f6dfc0"/>
-   <path d="m29 51 13 1" stroke="#d9c4a0" strokeWidth="2"/>
+   {mode==='flow'&&<path className="demo-spill" d="M48 31C64 28 72 36 72 49V63H8V52Q19 43 26 48L48 45Z" fill="#52b8e8"/>}
+   <path className="demo-fill" d="M53 32A21 21 0 1 0 53 44Z" fill="#52b8e8"/>
+   <path d="M53 30A23 23 0 1 0 53 46" stroke="#394c57" strokeWidth="4"/>
+   {mode==='close'?<path className="demo-bridge" d="M53 30Q59 38 53 46" stroke="#e38a43" strokeWidth="5" strokeDasharray="2 6"/>:<path className="demo-flow-arrow" d="M48 38h19m-6-5 6 5-6 5" stroke="#245e87" strokeWidth="3"/>}
+   <path d="M31 8q-8 11 0 11t0-11" fill="#288fc6"/>
   </>:<>
-   <path d="m29 21 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#f2c44d"/>
-   <path d="m46 12 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#83b9a5"/>
-   <path d="m14 45 1 4 4 1-4 1-1 4-1-4-4-1 4-1Z" fill="#e8ad6c"/>
+   <g className="demo-drawing">
+    <path d="m14 40 18-16 18 16M19 39v19h26V39" stroke="#e87e5f" strokeWidth="4"/>
+    <path d="M29 57V46h8v11" stroke="#a576b1" strokeWidth="4"/>
+    <circle cx="59" cy="21" r="6" fill="#f2c63f"/>
+    <path d="m14 61 48-1" stroke="#81b270" strokeWidth="4"/>
+   </g>
+   {mode==='erase'&&<rect className="demo-small-wipe" x="27" y="43" width="12" height="16" fill="#fffdf5"/>}
+   <g className="demo-eraser" stroke="#b26d78" strokeWidth="1.5">
+    <path d="m25 37 12-13q2-2 5 0l9 8q2 2 0 5L39 49Z" fill="#ee9ca9"/>
+    <path d="m25 37 6-6 14 12-6 6Z" fill="#f7dfad"/>
+   </g>
+   {mode==='clear'&&<path className="demo-clean" d="m40 24 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z" fill="#eebd36"/>}
   </>}
  </svg>;
 }
