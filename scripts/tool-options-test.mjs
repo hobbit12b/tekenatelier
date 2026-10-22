@@ -13,9 +13,9 @@ try{
  await button('mijn tekeningen').click();await page.locator('.drawing-card').first().click();
  const canvas=page.getByLabel('tekenblad',{exact:true});
  const pixel=()=>page.locator('.art-layer').evaluate(c=>[...c.getContext('2d').getImageData(30,30,1,1).data]);
- for(const mode of ['openingen sluiten','openingen volgen']){
+ for(const mode of ['kleine opening sluiten','gesloten vorm vullen','grotere opening sluiten']){
   await button('vullen').click();assert.equal(await page.locator('.side-panel').count(),0);assert.equal(await page.locator('.tool-popout').innerText(),'');await page.waitForTimeout(2400);await page.screenshot({path:'test-results/vul-subknoppen.png'});await button(mode).click();const r=await canvas.boundingBox();await page.mouse.click(r.x+r.width/2,r.y+r.height*400/848);await page.waitForTimeout(600);
-  assert.equal((await pixel())[3],mode==='openingen sluiten'?0:255,mode);
+  assert.equal((await pixel())[3],mode==='gesloten vorm vullen'?255:0,mode);
   await button('ongedaan maken').click();await page.waitForTimeout(150);
  }
  const before=await page.locator('.art-layer').evaluate(c=>c.toDataURL());
@@ -34,5 +34,16 @@ try{
   await button('tweede mengkleur #e5554f').click();await page.waitForTimeout(1800);assert(await button('met mengkleur tekenen').isEnabled());
   await button('sluiten').click();
  }
+ assert.equal(await page.locator('.tool-feedback').count(),0);
+ await page.getByLabel('titel van je tekening',{exact:true}).fill('mijn regenboog');await page.getByLabel('titel van je tekening',{exact:true}).press('Enter');
+ await button('naar huis').click();await button('mijn tekeningen').click();assert.equal(await page.locator('.drawing-card h3').first().innerText(),'mijn regenboog');assert.equal(await page.getByText('teken lekker verder',{exact:true}).count(),0);
+ await page.locator('.drawing-card').first().click();assert.equal(await page.getByLabel('titel van je tekening',{exact:true}).inputValue(),'mijn regenboog');await button('naar huis').click();
+ await button('nieuwe tekening').click();await page.getByLabel('titel van je tekening',{exact:true}).fill('tweede werk');await button('naar huis').click();
+ await button('voor de leerkracht').click();await page.getByLabel('leerkrachtcode',{exact:true}).fill('2468');await button('openen').click();await button('projecten').click();await button('alle tekeningen selecteren').click();
+ await button('selectie afdrukken via ricoh').click();await button('afdruk-pdf maken').click();await button('afdruk-pdf downloaden').waitFor();
+ assert.equal(await page.getByRole('link',{name:'open ricoh',exact:true}).getAttribute('href'),'https://www.eu.smart-integration.ricoh.com/print-site/');
+ const download=page.waitForEvent('download');await button('afdruk-pdf downloaden').click();const file=await download;await file.saveAs('test-results/afdruk-selectie.pdf');
+ const {readFile}=await import('node:fs/promises');const pdf=await readFile('test-results/afdruk-selectie.pdf');assert.equal((pdf.toString('latin1').match(/\/Type \/Page\b/g)||[]).length,2);
+ await button('sluiten').click();await button('druk mijn regenboog af via ricoh').click();assert(await page.getByText('1 tekening,',{exact:false}).count());
  assert.deepEqual(errors,[]);console.log('PASS both fill modes through worker/UI; eraser choices and undo clear; home left/title right; persistent colour equation and fresh pair each round');
 }finally{await browser.close();}

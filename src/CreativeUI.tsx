@@ -6,6 +6,11 @@ import {mix} from './mixing';
 import {Button,Modal,Icon} from './ui';
 import {exportDrawing,download,share} from './export';
 export const badges=['egel','uil','eekhoorn','blad','maan','ster'] as const;
+export function DrawingTitle({name,onChange}:{name:string;onChange:(name:string)=>void}){
+ const [title,setTitle]=useState(name==='mijn tekening'?'':name);
+ useEffect(()=>setTitle(name==='mijn tekening'?'':name),[name]);
+ return <input className="drawing-title" aria-label="titel van je tekening" placeholder="titel" maxLength={60} value={title} onChange={e=>setTitle(e.target.value)} onBlur={()=>{const next=title.trim()||'mijn tekening';if(next!==name)onChange(next);}} onKeyDown={e=>{if(e.key==='Enter')e.currentTarget.blur();}}/>;
+}
 export function Badge({name}:{name:string}){
  const cells:Record<string,number[]>={egel:[377,385,361,338],uil:[738,385,368,338],eekhoorn:[1106,385,342,338],blad:[0,723,377,363],maan:[738,723,368,363],ster:[1106,723,342,363]};
  return <svg aria-hidden="true" className="badge-art" viewBox={(cells[name]||cells.ster).join(' ')}><image href={import.meta.env.BASE_URL+'stickers/herfst/stickervel.png'} width="1448" height="1086"/></svg>;
