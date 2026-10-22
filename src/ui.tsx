@@ -2,14 +2,13 @@ const actions=import.meta.env.BASE_URL+'art/actions.png';
 const materials=['potlood','stift','kwast','wasco','glitter','gum'] as const;
 const illustrated=['vullen','mix','home','shapes','stickers','stempel','text','selectie','undo','redo','check','close','back','next','plus','minus','rotate','copy','delete','settings','lock','eye','hidden','download','upload','camera','folder','mirror','background','play','save','book','sound','mute','palette'] as const;
 export type IconName=typeof materials[number]|typeof illustrated[number];
-export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'erase'|'clear'}){
- const fill=mode==='close'||mode==='flow';
+export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'wide'|'erase'|'clear'}){
+ const fill=mode==='close'||mode==='flow'||mode==='wide';
  return <svg className={`choice-demo choice-${mode}`} aria-hidden="true" viewBox="0 0 80 72" fill="none" strokeLinecap="round" strokeLinejoin="round">
-  <rect x="4" y="4" width="72" height="64" rx="7" fill="#fffdf5" stroke="#cbbd9f" strokeWidth="2"/>
+  <rect x="4" y="4" width="72" height="64" rx="7" fill={mode==='clear'?'#b8cbdc':'#fffdf5'} stroke="#cbbd9f" strokeWidth="2"/>
   {fill?<>
    <circle className="demo-fill" cx="34" cy="38" r="21" fill="#52b8e8"/>
-   {mode==='close'?<path d="M57 34A23 23 0 1 0 57 42" stroke="#394c57" strokeWidth="4"/>:<circle cx="34" cy="38" r="23" stroke="#394c57" strokeWidth="4"/>}
-   <path d="M31 8q-8 11 0 11t0-11" fill="#288fc6"/>
+   {mode!=='flow'?<path d={mode==='wide'?'M41.9 16.4A23 23 0 1 0 55.6 30.1':'M47.2 19.2A23 23 0 1 0 52.8 24.8'} stroke="#394c57" strokeWidth="4"/>:<circle cx="34" cy="38" r="23" stroke="#394c57" strokeWidth="4"/>}
   </>:<>
    <g className="demo-drawing">
     <path d="m14 40 18-16 18 16M19 39v19h26V39" stroke="#e87e5f" strokeWidth="4"/>
@@ -23,12 +22,12 @@ export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'erase'|'clear'}){
     <path d="m29 38 5-6 8 7-5 6Z" fill="#f7dfad"/>
    </g>}
    {mode==='clear'&&<>
-    <g className="demo-magic" fill="#edba2c">
-     <path d="m22 19 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/>
-     <path d="m48 5 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/>
-     <path d="m60 23 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/>
+    <g className="demo-magic" fill="white" stroke="none">
+     {[[16,23,4],[28,9,3],[39,26,5],[52,13,4],[64,27,3],[24,35,3],[53,35,4],[10,12,2],[68,8,2]].map(([x,y,r],i)=><g key={i} transform={`translate(${x} ${y})`}><path className={`magic-star magic-star-${i%3}`} d={`M0 ${-r} ${r*.12} ${-r*.12} ${r} 0 ${r*.12} ${r*.12} 0 ${r} ${-r*.12} ${r*.12} ${-r} 0 ${-r*.12} ${-r*.12}Z`}/></g>)}
     </g>
-    <path className="demo-clean" d="m40 24 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z" fill="#eebd36"/>
+    <g className="demo-clean" fill="white" stroke="none">
+     {[[24,24,4],[43,37,7],[59,21,3],[21,51,3],[60,53,4]].map(([x,y,r],i)=><g key={i} transform={`translate(${x} ${y})`}><path className={`magic-star magic-star-${i%3}`} d={`M0 ${-r} ${r*.12} ${-r*.12} ${r} 0 ${r*.12} ${r*.12} 0 ${r} ${-r*.12} ${r*.12} ${-r} 0 ${-r*.12} ${-r*.12}Z`}/></g>)}
+    </g>
    </>}
 
   </>}

@@ -61,3 +61,13 @@ Het mengvenster toont de eerste kleur + de tweede kleur = de uitkomst. De invoer
 Bij vullen kun je kleine openingen laten sluiten (standaard) of openingen volgen. Sluiten overbrugt kleine onderbrekingen, geen onbeperkt grote gaten. Bij gum kies je zelf gummen of alle tekenacties op het vel verwijderen; ongedaan maken herstelt die acties. De ondergrond blijft behouden. Het huisje staat linksboven en tekenatelier rechtsboven op het tekenblad en in de galerij.
 
 Getest: 30 unit-tests, TypeScript en tool-options-test met beide vulmodi via de worker, leegmaken/undo, herhaald mengen en tabletindeling in landschap en portret.
+
+## Drie vulstanden, titel en Ricoh
+
+Vullen heeft drie visuele keuzes: gesloten vorm (geen overbrugging), kleine opening (straal 5 tekenpixels) en grotere opening (straal 14). De voorbeelden hebben de onderbreking rechtsboven. Een grote opening is niet onbeperkt: kies een kleinere opening of sluit de lijn als verf toch naar buiten loopt.
+
+Magisch wissen toont een stilstaande tekening die geleidelijk transparant wordt; vaste witte sparkles twinkelen, waarna het voorbeeld ongeveer anderhalve seconde leeg blijft. De gereedschapsaanduiding boven het blad is verwijderd. Een titel kan bovenaan worden ingevuld en wordt bij Enter of verlaten van het veld bewaard, ook via het huisje. De galerij gebruikt die titel en toont geen statuszin meer.
+
+In het leerkrachtmenu kun je een tekening of selectie als afdruk-pdf voorbereiden, downloaden of bewaren in bestanden en daarna het Ricoh-portaal openen. Zelf aanmelden en uploaden blijft nodig. Alle pagina’s zijn liggend A4, de beeldverhouding blijft behouden en tijdelijke foto’s worden uitgesloten. Geen automatische uploads. Zie GELUIDSVOORSTEL.md voor de onderzochte Ricoh-route en geluidshortlist. Geluiden zijn nog niet ingebouwd.
+
+Validatie: 31 unit-tests, TypeScript, productiebuild, browserproef met drie vulstanden, titel bewaren/heropenen, één/selectie afdrukken en twee PDF-pagina’s. De echte Ricoh-schoolaccount, printer en fysieke iPad zijn niet getest.

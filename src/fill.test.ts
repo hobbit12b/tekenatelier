@@ -4,6 +4,7 @@ const w=80,h=80;
 function drawing(gap=0){const a=new Uint8ClampedArray(w*h*4).fill(255);for(let y=15;y<=65;y++)for(let x=15;x<=65;x++)if((x===15||x===65||y===65||y===15)&&!(y===15&&Math.abs(x-40)<gap/2)){a.set([0,0,0,255],(y*w+x)*4);}return a;}
 const alpha=(a:Uint8ClampedArray,x:number,y:number)=>a[(y*w+x)*4+3];
 describe('vergevingsgezind vullen',()=>{
+ it('overbrugt een grotere opening alleen met de ruime instelling',()=>{expect(alpha(fillPixels(drawing(24),w,h,40,40,[255,0,0],5),5,5)).toBe(255);expect(alpha(fillPixels(drawing(24),w,h,40,40,[255,0,0],14),5,5)).toBe(0);});
  it('volgt kleine openingen wanneer sluiten uit staat',()=>{const out=fillPixels(drawing(8),w,h,40,40,[255,0,0],0);expect(alpha(out,40,40)).toBe(255);expect(alpha(out,5,5)).toBe(255);});
  it('overbrugt een kleine opening zonder buiten de vorm te vullen',()=>{const out=fillPixels(drawing(8),w,h,40,40,[255,0,0]);expect(alpha(out,40,40)).toBe(255);expect(alpha(out,5,5)).toBe(0);expect(alpha(out,40,10)).toBe(0);});
  it('laat een grote opening open',()=>{expect(alpha(fillPixels(drawing(24),w,h,40,40,[255,0,0]),5,5)).toBe(255);});
