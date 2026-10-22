@@ -53,3 +53,11 @@ Ook glitteranimatie, undo van glitter en verminderde beweging zijn opnieuw gecon
 De kwast heeft geen druipers meer. Transparante kleurmenging bij overlap blijft bestaan. Tijdens verplaatsen, schalen en draaien worden de geselecteerde vorm en alle latere tekenacties in hun oorspronkelijke volgorde weergegeven. Gumstreken en latere verflijnen verdwijnen dus niet meer tijdens het slepen. De gum blijft een bewerking op de plek op het papier waar is gegumd. Een verouderde asynchrone stempelrender kan geen nieuwere beweging overschrijven.
 
 `eraser-move-test.mjs` vergelijkt de volledige voorvertoning pixel voor pixel met het resultaat na loslaten, voor een vorm en een stempel, bij verplaatsen, schalen, draaien en undo/redo. Geslaagd in Edge. De verfpixeltest bevestigt dat de verwijderde druiper transparant blijft en overlappende kleuren nog mengen.
+
+## Kleurensom en gereedschapskeuzes
+
+Het mengvenster toont de eerste kleur + de tweede kleur = de uitkomst. De invoerkleuren blijven zichtbaar tijdens en na de draaiende menganimatie. Na een complete combinatie start iedere nieuwe keuze een nieuwe ronde: de andere kleur wordt weer een vraagteken. Pas na twee keuzes start de vertraging van 500 ms.
+
+Bij vullen kun je kleine openingen laten sluiten (standaard) of openingen volgen. Sluiten overbrugt kleine onderbrekingen, geen onbeperkt grote gaten. Bij gum kies je zelf gummen of alle tekenacties op het vel verwijderen; ongedaan maken herstelt die acties. De ondergrond blijft behouden. Het huisje staat linksboven en tekenatelier rechtsboven op het tekenblad en in de galerij.
+
+Getest: 30 unit-tests, TypeScript en tool-options-test met beide vulmodi via de worker, leegmaken/undo, herhaald mengen en tabletindeling in landschap en portret.

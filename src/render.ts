@@ -31,10 +31,10 @@ export function background(ctx:CanvasRenderingContext2D,d:Drawing){ctx.fillStyle
 export async function renderMarks(ctx:CanvasRenderingContext2D,d:Drawing){for(const m of d.marks){if(m.kind==='stroke')stroke(ctx,m,d.width);else if(m.kind==='fill')ctx.drawImage(await getImage(m.src),0,0,d.width,d.height);else await item(ctx,m);}}
 export async function renderArt(canvas:HTMLCanvasElement,d:Drawing,scale=1,withBackground=false){canvas.width=Math.round(d.width*scale);canvas.height=Math.round(d.height*scale);const ctx=canvas.getContext('2d')!;ctx.scale(scale,scale);await renderMarks(ctx,d);if(withBackground){const sheet=document.createElement('canvas');sheet.width=canvas.width;sheet.height=canvas.height;const paper=sheet.getContext('2d')!;paper.scale(scale,scale);background(paper,d);ctx.globalCompositeOperation='destination-over';ctx.drawImage(sheet,0,0,d.width,d.height);ctx.globalCompositeOperation='source-over';}return canvas;}
 export function hit(o:Item,p:Point){const dx=p.x-o.x,dy=p.y-o.y,x=dx*Math.cos(o.rotation)+dy*Math.sin(o.rotation),y=-dx*Math.sin(o.rotation)+dy*Math.cos(o.rotation);return Math.abs(x)<Math.max(28,o.w/2+8)&&Math.abs(y)<Math.max(28,o.h/2+8);}
-export async function flood(d:Drawing,p:Point,color:string){
+export async function flood(d:Drawing,p:Point,color:string,gapRadius=5){
  const c=await renderArt(document.createElement('canvas'),d,1,true),ctx=c.getContext('2d')!;
  const pixels=ctx.getImageData(0,0,c.width,c.height);
- const out=await calculateFill(pixels.data,c.width,c.height,p.x,p.y,[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)));
+ const out=await calculateFill(pixels.data,c.width,c.height,p.x,p.y,[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)),gapRadius);
  ctx.putImageData(new ImageData(out,c.width,c.height),0,0);
  return c.toDataURL('image/png');
 }
