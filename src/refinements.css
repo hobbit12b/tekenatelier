@@ -48,6 +48,11 @@
 @media(max-width:600px){.stamp-panel{left:8px;right:8px}.palette-bar{padding:4px}.palette-bar .color{width:40px;min-width:40px;height:40px;min-height:40px}.side-panel{max-width:calc(100% - 16px)}.object-controls .btn{min-width:44px;min-height:44px}}
 @media(prefers-reduced-motion:reduce){.mix-mixing .paint-left,.mix-mixing .paint-right{animation:none;opacity:1}.mix-mixing .paint-result{animation:none;opacity:1}}
 
-.tool-choices{display:grid;gap:14px}.tool-choices .btn{min-height:88px;flex-direction:column;font-size:16px}.tool-choices .btn svg,.tool-choices .tool-art{width:44px;height:44px}
 
 .topbar .header-title{margin-left:auto;flex-shrink:0}.topbar .history{margin-left:0}.topbar .save-status{margin-right:12px}.app:has(.home) .teacher-link{margin-left:auto}
+.tool-slot{position:relative;flex-shrink:0}
+.tool-popout{position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);display:flex;gap:6px;padding:6px;background:#fffaf0;border:2px solid #e8d9bd;border-radius:18px;box-shadow:0 4px 14px #705b4230;z-index:20}
+.tool-popout:before{content:'';position:absolute;left:-8px;top:calc(50% - 6px);width:12px;height:12px;transform:rotate(45deg);background:#fffaf0;border-left:2px solid #e8d9bd;border-bottom:2px solid #e8d9bd}
+.toolbox .tool-popout .btn{width:60px;min-width:60px;height:60px;min-height:60px;padding:4px;transform:none}
+.toolbox .tool-popout .btn svg{width:50px;height:50px}
+.toolbox:has(.tool-popout){position:relative;z-index:20;overflow:visible}

@@ -2,6 +2,27 @@ const actions=import.meta.env.BASE_URL+'art/actions.png';
 const materials=['potlood','stift','kwast','wasco','glitter','gum'] as const;
 const illustrated=['vullen','mix','home','shapes','stickers','stempel','text','selectie','undo','redo','check','close','back','next','plus','minus','rotate','copy','delete','settings','lock','eye','hidden','download','upload','camera','folder','mirror','background','play','save','book','sound','mute','palette'] as const;
 export type IconName=typeof materials[number]|typeof illustrated[number];
+export function ToolChoiceArt({mode}:{mode:'close'|'flow'|'erase'|'clear'}){
+ const fill=mode==='close'||mode==='flow';
+ return <svg aria-hidden="true" viewBox="0 0 64 64" fill="none" strokeLinecap="round" strokeLinejoin="round">
+  <path d="M8 6 49 8 56 17 54 57 7 55Z" fill="#fffdf5" stroke="#d4c4a5" strokeWidth="2"/>
+  {fill?<>
+   {mode==='flow'&&<path d="M38 19Q58 13 57 30L55 51Q42 58 14 50L12 31Q20 24 38 19" fill="#f6c64a" opacity=".8"/>}
+   <path d="M36 20Q20 13 16 29Q11 47 29 48Q47 51 47 34L44 28Q41 23 36 20" fill="#f4c642"/>
+   <path d="M34 18Q17 12 14 30Q10 49 30 50Q50 52 49 32" stroke="#538d85" strokeWidth="4"/>
+   {mode==='close'?<path d="M38 20 47 27" stroke="#538d85" strokeWidth="4" strokeDasharray="2 5"/>:<path d="m38 25 14-7m-6 0 6 0-2 6" stroke="#be7c26" strokeWidth="3"/>}
+  </>:mode==='erase'?<>
+   <path d="m13 42 9-11 2 16m-10-9 10 1m13 8 7-11 5 12" stroke="#73a4c6" strokeWidth="4"/>
+   <path d="m22 35 12-17q3-4 7-1l9 7q3 3 0 6L38 46Z" fill="#ef9f9f" stroke="#c77f83" strokeWidth="2"/>
+   <path d="m22 35 9-12 16 12-9 11Z" fill="#f6dfc0"/>
+   <path d="m29 51 13 1" stroke="#d9c4a0" strokeWidth="2"/>
+  </>:<>
+   <path d="m29 21 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#f2c44d"/>
+   <path d="m46 12 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#83b9a5"/>
+   <path d="m14 45 1 4 4 1-4 1-1 4-1-4-4-1 4-1Z" fill="#e8ad6c"/>
+  </>}
+ </svg>;
+}
 export function Icon({name,size=25}:{name:IconName;size?:number}){
  const tool=materials.indexOf(name as typeof materials[number]);
  if(tool>=0)return <span aria-hidden="true" className={`tool-art tool-art-${tool}`} style={{backgroundPosition:`${(tool%3)*50}% ${Math.floor(tool/3)*100}%`}}/>;
