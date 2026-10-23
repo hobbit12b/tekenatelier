@@ -1,9 +1,11 @@
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 
+import {Icon} from './ui';
+
 function ZoomIcon({kind}:{kind:'plus'|'minus'|'fit'|'hand'}){
- return <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-  {kind==='plus'||kind==='minus'?<><circle cx="13" cy="13" r="9" fill="#fffaf0"/><path d="m20 20 8 8M9 13h8"/>{kind==='plus'&&<path d="M13 9v8"/>}</>:kind==='fit'?<><rect x="8" y="6" width="16" height="20" rx="2" fill="#fffaf0"/><path d="M3 10V3h7M22 3h7v7M29 22v7h-7M10 29H3v-7"/></>:<path fill="#fff0d4" d="M9 17V9q0-4 4-2V5q2-3 4 0v2q4-2 4 2v2q4-1 4 3v9q-1 6-8 6h-2q-4-1-6-5l-5-7q0-4 3-2l2 2ZM13 7v9M17 7v9M21 11v6"/>}
- </svg>;
+ if(kind==='hand')return <svg viewBox="0 0 44 44" width="38" height="38" aria-hidden="true" strokeLinecap="round" strokeLinejoin="round"><path d="M12 24V13q0-4 4-3V7q1-5 5-2v4q4-3 5 1v3q4-2 5 2v12q-1 7-8 10h-5q-5-2-7-6l-6-8q-1-4 3-3Z" fill="#f3c894" stroke="#c88e59" strokeWidth="1.4"/><path d="M16 11v11M21 10v11M26 14v9M15 27q5-3 9 1" fill="none" stroke="#dca46e" strokeWidth="1.2"/><path d="M13 16v6M18 9v10M23 13v7M28 17v6" fill="none" stroke="#ffe5ba" strokeWidth="1.6"/><path d="m14 35 14-1 1 7-15 1Z" fill="#85bfc9" stroke="#639daa"/><path d="m17 37 8-1" stroke="#c0e1da"/></svg>;
+ if(kind==='fit')return <svg viewBox="0 0 44 44" width="38" height="38" aria-hidden="true" strokeLinecap="round" strokeLinejoin="round"><path d="m11 8 23 1-1 28-23-1Z" fill="#dac9a8"/><path d="m9 6 23 1-1 28-23-1Z" fill="#fffdf1" stroke="#d7c4a1"/><path d="m12 27 5-7 4 5 5-11" fill="none" stroke="#e99c88" strokeWidth="2.6"/><path d="m12 30 14 1" stroke="#99bd87" strokeWidth="2"/><circle cx="15" cy="13" r="3" fill="#f3d36d"/><path d="M3 12V3h9M31 3h9v9M40 31v9h-9M12 40H3v-9" fill="none" stroke="#7eb5b2" strokeWidth="3"/></svg>;
+ return <span className="zoom-glass"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="m28 29 10 10" stroke="#b98b59" strokeWidth="9" strokeLinecap="round"/><path d="m28 28 10 10" stroke="#efbf7c" strokeWidth="6" strokeLinecap="round"/><path d="m30 29 7 7" stroke="#ffe3ad" strokeWidth="1.4"/><path d="M32 17c1 9-5 16-14 16S2 27 3 18 8 3 17 3 31 7 32 17Z" fill="#b9dfdf" stroke="#79b7b5" strokeWidth="2"/><circle cx="17.5" cy="18" r="11" fill="#f5fcf3"/><path d="M7 16Q8 7 17 6" fill="none" stroke="#e5f4df" strokeWidth="2.5" strokeLinecap="round"/></svg><Icon name={kind} size={23}/></span>;
 }
 export function ZoomPaper({ratio,children}:{ratio:number;children:ReactNode}){
  const view=useRef<HTMLDivElement>(null),drag=useRef<{x:number;y:number;left:number;top:number}|null>(null);
