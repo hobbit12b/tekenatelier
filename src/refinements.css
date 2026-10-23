@@ -90,3 +90,13 @@
 .drawing-app .extra-tools .btn{min-height:48px;height:48px}
 .canvas-tools{display:flex;flex-direction:column;gap:3px;border-top:2px solid #e8d9bd;margin-top:5px;padding-top:7px}
 @media(max-width:749px){.drawing-app .extra-tools{top:86px;max-height:calc(100dvh - 240px)}.drawing-app .extra-tools .btn{min-height:44px;height:44px}}
+.zoom-paper{display:flex;flex-direction:column;flex:1;min-height:0;min-width:0;width:100%;gap:5px}
+.zoom-controls{display:flex;align-items:center;justify-content:center;gap:5px;flex:none;color:#548c88}
+.zoom-controls .btn{width:44px;min-width:44px;height:44px;min-height:44px;padding:6px;border-radius:14px}
+.zoom-controls output{font-size:13px;font-weight:700;min-width:42px;text-align:center}
+.zoom-viewport{flex:1;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;border-radius:15px}
+.zoom-space{display:flex;align-items:center;justify-content:center}
+.zoom-sheet{position:relative;flex:none}
+.zoom-sheet .paper{width:100%;height:100%;max-width:none;max-height:none}
+.pan-cover{position:absolute;inset:0;z-index:10;touch-action:none;cursor:grab;border:2px dashed #7cb5a3;border-radius:10px;background:#93bba108}
+.pan-cover:active{cursor:grabbing}
