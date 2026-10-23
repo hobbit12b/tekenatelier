@@ -84,3 +84,9 @@
 .choice-clear .demo-paper{fill:#fff;animation:demo-white-paper 5s infinite}
 @keyframes demo-white-paper{0%,12%,100%{fill:#fffdf5}60%,92%{fill:#fff}}
 @media(prefers-reduced-motion:reduce){.choice-erase .demo-door,.choice-clear .demo-clean{opacity:0}.choice-clear .demo-paper{fill:#fff}}
+
+/* All canvas actions share the right-hand tool tray. */
+.drawing-app .extra-tools{top:100px;gap:3px;max-height:calc(100dvh - 260px);overflow-y:auto;overflow-x:hidden}
+.drawing-app .extra-tools .btn{min-height:48px;height:48px}
+.canvas-tools{display:flex;flex-direction:column;gap:3px;border-top:2px solid #e8d9bd;margin-top:5px;padding-top:7px}
+@media(max-width:749px){.drawing-app .extra-tools{top:86px;max-height:calc(100dvh - 240px)}.drawing-app .extra-tools .btn{min-height:44px;height:44px}}

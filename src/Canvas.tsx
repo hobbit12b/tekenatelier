@@ -62,7 +62,7 @@ export function DrawingCanvas(p:Props){
    void flood(original,pt,p.color,p.gapRadius).then(src=>{if(alive.current)state.current.onChange({...original,marks:[...original.marks,{kind:'fill',id:uid(),src}]},original);}).catch(p.onError).finally(()=>{fillPending.current=false;if(alive.current)setFilling(false);});return;
   }
   if(p.tool==='stempel'){if(p.stamp){const mark={...p.stamp,id:uid(),x:pt.x,y:pt.y};p.onChange(d=>d.id===p.drawing.id?{...d,marks:[...d.marks,mark]}:d);}return;}
-  draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widths[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true}:{})};paint();
+  draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widths[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true,dryBrush:true}:{})};paint();
  };
  const move=(e:React.PointerEvent)=>{
   if(!pointers.current.has(e.pointerId))return;const pt=point(e);pointers.current.set(e.pointerId,pt);

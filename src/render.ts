@@ -1,3 +1,4 @@
+import {paintDryBrush} from './paintBrush';
 import {calculateFill} from './fillClient';
 import {type Drawing,type Stroke,type Item,type Point} from './model';
 import {drawSparkle,sparklePoints} from './sparkles';
@@ -18,10 +19,11 @@ export function imageCacheStats(){return {count:images.size,bytes:[...images.val
 export function stroke(ctx:CanvasRenderingContext2D,s:Stroke,canvasWidth:number){ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=s.color;ctx.fillStyle=s.color;ctx.lineWidth=s.width;ctx.globalCompositeOperation=s.tool==='gum'?'destination-out':'source-over';if(s.tool==='potlood'){ctx.globalAlpha=.72;ctx.lineWidth=s.width*.55;}if(s.tool==='kwast'){ctx.globalCompositeOperation=s.wet?'multiply':'source-over';ctx.globalAlpha=.65;ctx.shadowBlur=s.width*.16;ctx.shadowColor=s.color;}
  const path=(points:Point[])=>{if(!points.length)return;ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);for(const p of points.slice(1))ctx.lineTo(p.x,p.y);if(points.length===1)ctx.lineTo(points[0].x+.01,points[0].y);ctx.stroke();};
  const draw=(ps:Point[])=>{
+  if(s.tool==='kwast'&&s.dryBrush){paintDryBrush(ctx,s,ps);return;}
   const pressure=(s.tool==='kwast'||s.tool==='potlood')&&ps.some(p=>p.pressure!==undefined);
   if(pressure){
    const segments=ps.length===1?[[ps[0],{...ps[0],x:ps[0].x+.01}]]:ps.slice(1).map((p,i)=>[ps[i],p]);
-   for(const [a,b] of segments){const force=Math.max(.05,Math.min(1,((a.pressure??.5)+(b.pressure??.5))/2));ctx.lineWidth=s.width*(s.tool==='kwast'?.25+1.5*force:.55);ctx.globalAlpha=s.tool==='potlood'?.12+.83*force:.65;path([a,b]);}
+   for(const [a,b] of segments){const force=Math.max(.05,Math.min(1,((a.pressure??.5)+(b.pressure??.5))/2));ctx.lineWidth=s.width*(s.tool==='kwast'?.25+1.5*force:.55);ctx.globalAlpha=s.tool==='potlood'?.05+.95*Math.pow(force,1.4):.65;path([a,b]);}
   }else if(s.tool==='wasco'){ctx.globalAlpha=.18;for(let n=0;n<8;n++){ctx.lineWidth=s.width/8;path(ps.map(p=>({x:p.x+Math.sin(n*9)*s.width*.4,y:p.y+Math.cos(n*9)*s.width*.4})));}}else path(ps);
   if(s.tool==='glitter'){let distance=0;for(let i=1;i<ps.length;i++){const a=ps[i-1],b=ps[i],len=Math.hypot(b.x-a.x,b.y-a.y);for(let t=0;t<len;t+=5){const k=distance+t,x=a.x+(b.x-a.x)*t/len+Math.sin(k*19)*s.width*.4,y=a.y+(b.y-a.y)*t/len+Math.cos(k*13)*s.width*.4;ctx.fillStyle=k%3<1?'#fff6bb':'#ffffff';ctx.fillRect(x,y,2.5,2.5);}distance+=len;}}};
  draw(s.points);if(s.mirror)draw(s.points.map(p=>({...p,x:canvasWidth-p.x})));if(s.tool==='glitter'){for(const star of sparklePoints([s],canvasWidth,160)){ctx.fillStyle='#fff8c8';drawSparkle(ctx,star.x,star.y,star.radius*.8);ctx.fillStyle='#ffffff';drawSparkle(ctx,star.x,star.y,star.radius*.35);}}ctx.restore();}

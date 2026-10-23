@@ -1,6 +1,6 @@
 export type Tool = 'potlood'|'stift'|'kwast'|'wasco'|'glitter'|'gum'|'vullen'|'selectie'|'stempel';
 export type Point = {x:number;y:number;pressure?:number};
-export type Stroke = {kind:'stroke';id:string;tool:Tool;color:string;width:number;points:Point[];mirror:boolean;wet?:boolean};
+export type Stroke = {kind:'stroke';id:string;tool:Tool;color:string;width:number;points:Point[];mirror:boolean;wet?:boolean;dryBrush?:boolean};
 export type ShapeName = 'cirkel'|'vierkant'|'rechthoek'|'driehoek'|'ovaal'|'ruit'|'zeshoek'|'ster'|'hart'|'lijn';
 export type Item = {kind:'shape'|'text'|'sticker';id:string;x:number;y:number;w:number;h:number;rotation:number;color:string;filled:boolean;shape?:ShapeName;text?:string;font?:string;src?:string};
 export type Fill = {kind:'fill';id:string;src:string};
