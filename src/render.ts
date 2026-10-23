@@ -1,3 +1,4 @@
+import {drawDryMaterial} from './dryMaterials';
 import {paintDryBrush} from './paintBrush';
 import {calculateFill} from './fillClient';
 import {type Drawing,type Stroke,type Item,type Point} from './model';
@@ -19,6 +20,7 @@ export function imageCacheStats(){return {count:images.size,bytes:[...images.val
 export function stroke(ctx:CanvasRenderingContext2D,s:Stroke,canvasWidth:number){ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=s.color;ctx.fillStyle=s.color;ctx.lineWidth=s.width;ctx.globalCompositeOperation=s.tool==='gum'?'destination-out':'source-over';if(s.tool==='potlood'){ctx.globalAlpha=.72;ctx.lineWidth=s.width*.55;}if(s.tool==='kwast'){ctx.globalCompositeOperation=s.wet?'multiply':'source-over';ctx.globalAlpha=.65;ctx.shadowBlur=s.width*.16;ctx.shadowColor=s.color;}
  const path=(points:Point[])=>{if(!points.length)return;ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);for(const p of points.slice(1))ctx.lineTo(p.x,p.y);if(points.length===1)ctx.lineTo(points[0].x+.01,points[0].y);ctx.stroke();};
  const draw=(ps:Point[])=>{
+  if(s.grain&&(s.tool==='potlood'||s.tool==='wasco')){drawDryMaterial(ctx,s,ps);return;}
   if(s.tool==='kwast'&&s.dryBrush){paintDryBrush(ctx,s,ps);return;}
   const pressure=(s.tool==='kwast'||s.tool==='potlood')&&ps.some(p=>p.pressure!==undefined);
   if(pressure){
