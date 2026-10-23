@@ -10,7 +10,7 @@ try {
  await page.goto('http://127.0.0.1:5174/');await page.getByRole('heading',{name:'tekenatelier'}).waitFor();
  await page.screenshot({path:'test-results/startscherm.png',fullPage:true});check('startscherm op iPad-formaat');
  await page.getByRole('button',{name:/nieuwe tekening/}).click();
- const canvas=page.getByLabel('tekenblad');const box=await canvas.boundingBox();assert(box.width>500&&box.height>300,JSON.stringify(box));
+ const canvas=page.getByLabel('tekenblad',{exact:true});const box=await canvas.boundingBox();assert(box.width>500&&box.height>300,JSON.stringify(box));
  await page.getByRole('button',{name:'stift',exact:true}).click();await page.mouse.move(box.x+100,box.y+100);await page.mouse.down();await page.mouse.move(box.x+330,box.y+200,{steps:20});await page.mouse.up();
  await page.waitForFunction(()=>!document.querySelector('[aria-label="ongedaan maken"]').disabled);await page.getByRole('button',{name:'ongedaan maken',exact:true}).click();assert(await page.getByRole('button',{name:'opnieuw doen',exact:true}).isEnabled());await page.getByRole('button',{name:'opnieuw doen',exact:true}).click();check('tekenen, undo en redo');
  assert.equal(await page.getByRole('button',{name:/lijndikte [1-5]/}).count(),5);check('vijf lijndiktes');

@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {type Drawing,type Photo,type Tool,type Item,type Point,type Stroke,uid,widths} from './model';
+import {type Drawing,type Photo,type Tool,type Item,type Point,type Stroke,uid,widthsForTool} from './model';
 import {background,renderArt,renderMarks,stroke,hit,flood} from './render';
 import type {DrawingEdit} from './edits';
 import {transformItem} from './manipulation';
@@ -25,7 +25,7 @@ export function DrawingCanvas(p:Props){
    if(!draft.current&&!moving.current)live.current?.getContext('2d')!.clearRect(0,0,c.width,c.height);
   };void render().catch(p.onError);
  },[p.drawing]);
- const point=(e:{clientX:number;clientY:number;pointerType?:string;pressure?:number})=>{const r=live.current!.getBoundingClientRect(),d=state.current.drawing;return {x:(e.clientX-r.left)/r.width*d.width,y:(e.clientY-r.top)/r.height*d.height,...(e.pointerType==='pen'&&e.pressure!==undefined?{pressure:Math.max(.05,Math.min(1,e.pressure))}:{})};};
+ const point=(e:{clientX:number;clientY:number;pointerType?:string;pressure?:number})=>{const r=live.current!.getBoundingClientRect(),d=state.current.drawing;return {x:(e.clientX-r.left)/r.width*d.width,y:(e.clientY-r.top)/r.height*d.height,...(e.pointerType==='pen'&&state.current.tool!=='potlood'&&e.pressure!==undefined?{pressure:Math.max(.05,Math.min(1,e.pressure))}:{})};};
  const paint=()=>{cancelAnimationFrame(frame.current);frame.current=requestAnimationFrame(()=>{
   const c=live.current;if(!c)return;const ctx=c.getContext('2d')!,s=draft.current,m=moving.current;
   if(!m?.changed)ctx.clearRect(0,0,c.width,c.height);
@@ -62,7 +62,7 @@ export function DrawingCanvas(p:Props){
    void flood(original,pt,p.color,p.gapRadius).then(src=>{if(alive.current)state.current.onChange({...original,marks:[...original.marks,{kind:'fill',id:uid(),src}]},original);}).catch(p.onError).finally(()=>{fillPending.current=false;if(alive.current)setFilling(false);});return;
   }
   if(p.tool==='stempel'){if(p.stamp){const mark={...p.stamp,id:uid(),x:pt.x,y:pt.y};p.onChange(d=>d.id===p.drawing.id?{...d,marks:[...d.marks,mark]}:d);}return;}
-  draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widths[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true,dryBrush:true}:{}),...(['potlood','wasco'].includes(p.tool)?{grain:true}:{})};paint();
+  draft.current={kind:'stroke',id:uid(),tool:p.tool,color:p.color,width:widthsForTool(p.tool)[p.size]*(p.tool==='gum'?2:1),points:[pt],mirror:p.mirror,...(p.tool==='kwast'?{wet:true,dryBrush:true}:{}),...(['potlood','wasco'].includes(p.tool)?{grain:true}:{})};paint();
  };
  const move=(e:React.PointerEvent)=>{
   if(!pointers.current.has(e.pointerId))return;const pt=point(e);pointers.current.set(e.pointerId,pt);
