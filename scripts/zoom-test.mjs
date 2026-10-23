@@ -14,7 +14,9 @@ await c.dispatchEvent('pointermove',{pointerId:1,pointerType:'pen',pressure:.9,c
 await c.dispatchEvent('pointerup',{pointerId:1,pointerType:'pen',clientX:enlarged.x+160,clientY:enlarged.y+60,bubbles:true});
 await button('vel verschuiven').click();const cover=page.getByLabel('sleep om het vel te verschuiven');assert(await cover.isVisible());
 await page.locator('.zoom-viewport').evaluate(e=>e.scrollTo(100,100));assert(await page.locator('.zoom-viewport').evaluate(e=>e.scrollLeft>0||e.scrollTop>0));
+await button('kwast').click();assert.equal(await cover.count(),0);
 await button('hele vel tonen').click();assert.equal(await page.getByLabel('zoompercentage').innerText(),'100%');assert.equal(await cover.count(),0);
-for(const [width,height] of [[1024,768],[768,1024]]){await page.setViewportSize({width,height});await page.waitForTimeout(100);const r=await c.boundingBox();assert(r.x>=0&&r.y>=0&&r.x+r.width<=width&&r.y+r.height<height-70,JSON.stringify(r));await page.screenshot({path:`test-results/zoom-${width}.png`});}
+for(const [width,height] of [[1024,768],[768,1024]]){await page.setViewportSize({width,height});await page.waitForTimeout(100);const r=await c.boundingBox();assert(r.x>=0&&r.y>=0&&r.x+r.width<=width&&r.y+r.height<height-70,JSON.stringify(r));for(const selector of ['.material-tools','.extra-tools']){const tray=await page.locator(selector).boundingBox();assert(Math.abs(tray.y+tray.height/2-(r.y+r.height/2))<3,JSON.stringify({tray,r}));}
+await button('gum').click();const pop=await page.locator('.tool-popout').boundingBox();assert(pop.x>=0&&pop.y>=0&&pop.x+pop.width<=width&&pop.y+pop.height<=height);await button('gum').click();await page.screenshot({path:`test-results/zoom-${width}.png`});}
 console.log('PASS pencil starts thin, separate width ranges, zoom ratio, pan, reset, portrait/landscape fit');
 }finally{await browser.close();}

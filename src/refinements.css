@@ -115,3 +115,9 @@
 .zoom-controls .btn:hover:not(:disabled){background:#fff0c7;border-color:#edc67a}
 .zoom-controls .btn.active{background:#edf4d9;border-color:#83b8a3}
 @media(max-width:749px){.drawing-app .extra-tools{top:80px}}
+
+/* Center both side trays on the visible drawing paper. */
+.drawing-app .toolbox,.drawing-app .toolbox:has(.tool-popout){position:static;padding:0;border:0;background:none;box-shadow:none;overflow:visible}
+.material-tools{position:absolute;left:16px;top:var(--paper-middle,50%);transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;padding:5px;background:#fffaf0e8;border:2px solid #e8d9bd;border-radius:25px 20px 24px 20px;box-shadow:0 4px 0 #cbb39130;z-index:20}
+.drawing-app .extra-tools{position:absolute;right:15px;top:var(--paper-middle,50%);transform:translateY(-50%);max-height:calc(100% - 16px)}
+@media(max-width:749px){.material-tools{left:5px;padding:3px;gap:2px}.drawing-app .extra-tools{right:4px;top:var(--paper-middle,50%)}}
