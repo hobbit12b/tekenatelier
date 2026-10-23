@@ -15,7 +15,7 @@ export const tools:Tool[]=['potlood','stift','kwast','wasco','glitter','gum','vu
 export const defaults:Settings={themes:['herfst'],tools,background:'#ffffff',size:'landschap',sound:false,challenge:false};
 export const colors=['#e5554f','#ec9146','#f1c83c','#90b45b','#348568','#74bbd4','#3d6cbb','#8960a8','#dd85a0','#925e43','#293c3a','#ffffff','#9baba8','#f1d0b4','#c58c68','#704b3c'];
 export const widths=[3,7,13,23,38];
-export const widthsForTool=(tool:Tool)=>tool==='potlood'?[1.8,2.6,3.6,4.8,6]:tool==='wasco'?[10,18,28,42,58]:widths;
+export const widthsForTool=(tool:Tool)=>tool==='potlood'?[3.6,4.8,6,7.2,8.4]:tool==='wasco'?[10,18,28,42,58]:widths;
 export const shapeNames:ShapeName[]=['cirkel','vierkant','rechthoek','driehoek','ovaal','ruit','zeshoek','ster','hart','lijn'];
 export const themes=[
  {id:'herfst',name:'herfst in het heksenbos',challenge:'teken een bos voor de egel',assets:['heks','heksenhoed','bezem','heksenketel','toverboek','toverstaf','paddenstoel','eikel','kastanje','herfstblad','egel','uil','spin','vleermuis','eekhoorn','boom','maan','toverster']},

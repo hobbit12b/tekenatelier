@@ -18,6 +18,6 @@ try{
   stroke(ctx,{...base,tool:'wasco',color:'#e5554f',points:Array.from({length:300},(_,i)=>({x:50+i*2.7,y:370+Math.sin(i/30)*25}))},1000);
   c.style.background='white';document.body.replaceChildren(c);return {light,dark,chalk,same};
  });
- assert(result.dark.sum>result.light.sum*3);assert(result.dark.holes>0);assert(result.chalk.holes>result.dark.holes);assert(result.chalk.levels>20);assert(result.same);
+ assert(result.dark.sum>result.light.sum*3);assert.equal(result.dark.holes,0);assert(result.chalk.holes>result.dark.holes);assert(result.chalk.levels>20);assert(result.same);
  await page.screenshot({path:'test-results/potlood-krijt.png'});console.log('PASS grain, chalk gaps, pencil pressure and identical redraw',result);
 }finally{await browser.close();}

@@ -11,8 +11,8 @@ function texture(tool:string,color:string){
  for(let y=0;y<128;y++)for(let x=0;x<128;x++){
   const cell=1,seed=Math.sin(Math.floor(x/cell)*127.1+Math.floor(y/cell)*311.7)*43758.5453;
   const grain=seed-Math.floor(seed);
-  if(grain<(chalk?.3:.14))continue;
-  ctx.globalAlpha=chalk?.25+.75*grain:.18+.82*grain;
+  if(chalk&&grain<.3)continue;
+  ctx.globalAlpha=chalk?.25+.75*grain:.78+.22*grain;
   ctx.fillRect(x,y,1,1);
  }
  textures.set(key,tile);
