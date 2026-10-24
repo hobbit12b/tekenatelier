@@ -121,3 +121,10 @@
 .material-tools{position:absolute;left:16px;top:var(--paper-middle,50%);transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;padding:5px;background:#fffaf0e8;border:2px solid #e8d9bd;border-radius:25px 20px 24px 20px;box-shadow:0 4px 0 #cbb39130;z-index:20}
 .drawing-app .extra-tools{position:absolute;right:15px;top:var(--paper-middle,50%);transform:translateY(-50%);max-height:calc(100% - 16px)}
 @media(max-width:749px){.material-tools{left:5px;padding:3px;gap:2px}.drawing-app .extra-tools{right:4px;top:var(--paper-middle,50%)}}
+
+.fullscreen-button{flex:none;min-width:48px;min-height:48px;padding:5px}
+.fullscreen-symbol{display:grid;place-items:center;border:2px solid #d7bb87;border-radius:9px;background:#fffdf1;width:36px;height:32px}
+.fullscreen-symbol .crayon-icon{width:28px!important;height:28px!important;transform:rotate(45deg)}
+.fullscreen-button.active .fullscreen-symbol{background:#edf4d9;border-color:#83b8a3}
+html:fullscreen,html:-webkit-full-screen{background:#faf5e9;width:100%;height:100%}
+@media(max-width:650px){.topbar .fullscreen-button{min-width:42px;min-height:44px;padding:3px}}
